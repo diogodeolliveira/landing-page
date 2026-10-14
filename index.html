@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Forno d'Oro — Pizzeria di Lusso</title>
+  <meta name="description" content="Pizzaria de luxo: massa de fermentação natural de 72 horas, ingredientes DOP e forno a lenha.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;0,600;1,300;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Loader -->
+  <div class="loader" aria-hidden="true">
+    <div class="loader__ring"></div>
+    <span class="loader__text">Forno d'Oro</span>
+  </div>
+
+  <!-- Cursor personalizado -->
+  <div class="cursor" aria-hidden="true"><span class="cursor__label"></span></div>
+
+  <!-- Barra de progresso do scroll -->
+  <div class="progress" aria-hidden="true"><span></span></div>
+
+  <!-- Navegação -->
+  <header class="nav">
+    <a href="#top" class="nav__logo">Forno <em>d'Oro</em></a>
+    <nav class="nav__links">
+      <a href="#manifesto">Filosofia</a>
+      <a href="#ritual">O Ritual</a>
+      <a href="#menu">Menu</a>
+      <a href="#forno">O Forno</a>
+    </nav>
+    <a href="#reserva" class="btn btn--small magnetic">Reservar</a>
+  </header>
+
+  <main id="top">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero__bg-text" aria-hidden="true">NAPOLI · ORO · FUOCO · NAPOLI · ORO · FUOCO ·</div>
+
+      <div class="hero__content">
+        <p class="eyebrow hero__eyebrow">Pizzeria di Lusso · Desde 1987</p>
+        <h1 class="hero__title">
+          <span class="line"><span>A arte</span></span>
+          <span class="line"><span>do <em>fogo</em></span></span>
+          <span class="line"><span>e do <em>ouro</em></span></span>
+        </h1>
+        <p class="hero__sub">Massa de fermentação natural por 72 horas, ingredientes DOP e um forno a lenha a 485&nbsp;°C.</p>
+        <a href="#reserva" class="btn magnetic">Reserve sua mesa</a>
+      </div>
+
+      <div class="hero__pizza" data-cursor="Gire">
+        <div class="hero__plate">
+          <svg class="ring" viewBox="0 0 200 200" aria-hidden="true">
+            <defs><path id="ringHero" d="M100,100 m-92,0 a92,92 0 1,1 184,0 a92,92 0 1,1 -184,0"/></defs>
+            <text><textPath href="#ringHero" textLength="574">FORNO D'ORO · PIZZERIA DI LUSSO · NAPOLI · SÃO PAULO · </textPath></text>
+          </svg>
+          <div class="hero__disc">
+            <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=1200&q=80"
+                 alt="Pizza margherita vista de cima" fetchpriority="high">
+          </div>
+        </div>
+      </div>
+
+      <div class="hero__scroll" aria-hidden="true">
+        <span>Role para descobrir</span>
+        <i></i>
+      </div>
+    </section>
+
+    <!-- MANIFESTO -->
+    <section class="manifesto" id="manifesto">
+      <p class="eyebrow">La nostra filosofia</p>
+      <p class="manifesto__text split-words">
+        Não fazemos pizza para matar a fome. Fazemos para criar memória. Cada disco nasce de farinha moída em pedra, água de nascente e tempo — muito tempo. O resto é fogo, mãos e paciência.
+      </p>
+      <div class="stats">
+        <div class="stat"><span class="stat__num" data-count="72">72</span><span class="stat__unit">h</span><p>de fermentação natural</p></div>
+        <div class="stat"><span class="stat__num" data-count="485">485</span><span class="stat__unit">°C</span><p>no coração do forno</p></div>
+        <div class="stat"><span class="stat__num" data-count="90">90</span><span class="stat__unit">s</span><p>para a pizza perfeita</p></div>
+      </div>
+    </section>
+
+    <!-- RITUAL (seção fixa: cada ingrediente aparece com o scroll) -->
+    <section class="ritual" id="ritual">
+      <div class="ritual__pin">
+        <div class="ritual__steps">
+          <p class="eyebrow">Il rituale</p>
+          <ol class="steps">
+            <li class="step is-active">
+              <span class="step__n">01</span>
+              <h3>Impasto</h3>
+              <p>Farinha tipo 00 moída em pedra, aberta à mão. Nunca rolo, nunca pressa.</p>
+            </li>
+            <li class="step">
+              <span class="step__n">02</span>
+              <h3>Pomodoro San Marzano</h3>
+              <p>Tomates DOP do Vesúvio, esmagados à mão com sal marinho de Trapani.</p>
+            </li>
+            <li class="step">
+              <span class="step__n">03</span>
+              <h3>Mozzarella di Bufala</h3>
+              <p>Chega da Campânia três vezes por semana, ainda morna.</p>
+            </li>
+            <li class="step">
+              <span class="step__n">04</span>
+              <h3>Basilico &amp; Olio</h3>
+              <p>Manjericão da nossa horta e azeite extravirgem da Puglia.</p>
+            </li>
+            <li class="step">
+              <span class="step__n">05</span>
+              <h3>Foglia d'Oro</h3>
+              <p>O toque final: folhas de ouro comestível 24 quilates.</p>
+            </li>
+          </ol>
+        </div>
+
+        <div class="ritual__stage">
+          <div class="ritual__glow"></div>
+          <svg class="ring ring--ritual" viewBox="0 0 200 200" aria-hidden="true">
+            <defs><path id="ringRitual" d="M100,100 m-92,0 a92,92 0 1,1 184,0 a92,92 0 1,1 -184,0"/></defs>
+            <text><textPath href="#ringRitual" textLength="574">IMPASTO · POMODORO · MOZZARELLA · BASILICO · ORO · </textPath></text>
+          </svg>
+          <div class="ritual__disc">
+            <div class="frame"><img src="https://images.unsplash.com/photo-1586444248902-2f64eddc13df?auto=format&fit=crop&w=1000&q=80" alt="Massa de pão artesanal enfarinhada"></div>
+            <div class="frame"><img src="https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=1000&q=80" alt="Tomates frescos"></div>
+            <div class="frame"><img src="https://images.unsplash.com/photo-1541745537411-b8046dc6d66c?auto=format&fit=crop&w=1000&q=80" alt="Mozzarella derretida puxando"></div>
+            <div class="frame"><img src="https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=1000&q=80" alt="Azeite extravirgem e azeitonas"></div>
+            <div class="frame"><img src="https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?auto=format&fit=crop&w=1000&q=80" alt="Pizza margherita finalizada"></div>
+          </div>
+          <div class="ritual__counter"><span id="stepNow">01</span> / 05</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MENU HORIZONTAL -->
+    <section class="menu" id="menu">
+      <div class="menu__pin">
+        <div class="menu__head">
+          <p class="eyebrow">Il menù</p>
+          <h2>Assinaturas <em>da casa</em></h2>
+          <p class="menu__hint">Continue rolando →</p>
+        </div>
+        <div class="menu__track">
+          <article class="card" data-cursor="Ver">
+            <div class="card__visual"><img src="https://images.unsplash.com/photo-1595854341625-f33ee10dbf94?auto=format&fit=crop&w=900&q=80" alt="Pizza margherita"></div>
+            <div class="card__body">
+              <span class="card__n">I</span>
+              <h3>Margherita d'Oro</h3>
+              <p>San Marzano, búfala, manjericão e folha de ouro 24k.</p>
+              <span class="card__price">R$ 189</span>
+            </div>
+          </article>
+          <article class="card" data-cursor="Ver">
+            <div class="card__visual"><img src="https://images.unsplash.com/photo-1620374645310-f9d97e733268?auto=format&fit=crop&w=900&q=80" alt="Pizza de cogumelos e trufa"></div>
+            <div class="card__body">
+              <span class="card__n">II</span>
+              <h3>Tartufo Nero</h3>
+              <p>Fior di latte, cogumelos selvagens, trufa negra de Norcia ralada na mesa.</p>
+              <span class="card__price">R$ 298</span>
+            </div>
+          </article>
+          <article class="card" data-cursor="Ver">
+            <div class="card__visual"><img src="https://images.unsplash.com/photo-1528137871618-79d2761e3fd5?auto=format&fit=crop&w=900&q=80" alt="Pizza com presunto cru"></div>
+            <div class="card__body">
+              <span class="card__n">III</span>
+              <h3>Parma 36 Mesi</h3>
+              <p>Presunto de Parma curado por 36 meses, rúcula selvagem e burrata.</p>
+              <span class="card__price">R$ 236</span>
+            </div>
+          </article>
+          <article class="card" data-cursor="Ver">
+            <div class="card__visual"><img src="https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?auto=format&fit=crop&w=900&q=80" alt="Pizza branca com ricota e espinafre"></div>
+            <div class="card__body">
+              <span class="card__n">IV</span>
+              <h3>Bianca Reale</h3>
+              <p>Ricota de búfala, espinafre baby, nozes e raspas de limão siciliano.</p>
+              <span class="card__price">R$ 224</span>
+            </div>
+          </article>
+          <article class="card" data-cursor="Ver">
+            <div class="card__visual"><img src="https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&w=900&q=80" alt="Pizza de salame picante"></div>
+            <div class="card__body">
+              <span class="card__n">V</span>
+              <h3>Diavola Reale</h3>
+              <p>'Nduja calabresa, salame picante e mel de pimenta.</p>
+              <span class="card__price">R$ 212</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- FORNO -->
+    <section class="forno" id="forno">
+      <canvas class="embers" aria-hidden="true"></canvas>
+      <div class="forno__inner">
+        <p class="eyebrow">Il forno</p>
+        <h2 class="forno__title">
+          <span class="reveal-line"><span>Construído</span></span>
+          <span class="reveal-line"><span>em Nápoles,</span></span>
+          <span class="reveal-line"><span><em>tijolo por tijolo.</em></span></span>
+        </h2>
+        <p class="forno__text">Nosso forno foi erguido por mestres forneiros napolitanos com argila do Vesúvio. Queima carvalho e oliveira, e nunca se apaga — nem quando estamos fechados.</p>
+      </div>
+      <div class="forno__arch">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1579751626657-72bc17010498?auto=format&fit=crop&w=1000&q=80" alt="Pizza assando no forno a lenha">
+        <div class="forno__fire" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <!-- DEPOIMENTO / PARALLAX -->
+    <section class="quote">
+      <div class="quote__bg" aria-hidden="true">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1800&q=75" alt="">
+      </div>
+      <div class="quote__layer quote__layer--1" aria-hidden="true">Bellissima</div>
+      <div class="quote__layer quote__layer--2" aria-hidden="true">Perfetta</div>
+      <blockquote>
+        <p>“A melhor pizza que comi fora de Nápoles. Talvez a melhor de todas.”</p>
+        <cite>— Guia Gastronômico, 2026</cite>
+      </blockquote>
+    </section>
+
+    <!-- RESERVA -->
+    <section class="reserva" id="reserva">
+      <div class="reserva__bg" aria-hidden="true">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1800&q=75" alt="">
+      </div>
+      <div class="reserva__inner">
+        <p class="eyebrow">Prenotazione</p>
+        <h2>Uma mesa <em>espera</em> por você</h2>
+        <form class="form" novalidate>
+          <label>Nome<input type="text" name="nome" placeholder="Seu nome" autocomplete="given-name" required></label>
+          <label>Data<input type="date" name="data" required></label>
+          <label>Pessoas
+            <select name="pessoas">
+              <option>2 pessoas</option><option>3 pessoas</option><option>4 pessoas</option><option>5+ pessoas</option>
+            </select>
+          </label>
+          <button type="submit" class="btn magnetic">Confirmar reserva</button>
+          <p class="form__msg" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__big">Forno <em>d'Oro</em></div>
+    <div class="footer__cols">
+      <p>Rua Oscar Freire, 000<br>São Paulo · SP</p>
+      <p>Ter a Dom · 19h às 00h<br>Fechado às segundas</p>
+      <p>© 2026 Forno d'Oro<br>Fotos: Unsplash</p>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
