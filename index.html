@@ -3,265 +3,313 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Forno d'Oro — Pizzeria di Lusso</title>
-  <meta name="description" content="Pizzaria de luxo: massa de fermentação natural de 72 horas, ingredientes DOP e forno a lenha.">
+  <title>Pizzaria das Famílias · O buffet mais completo de Pinhais</title>
+  <meta name="description" content="Buffet livre de pizza doce e salgada, porções e comida japonesa, todos os dias das 19h às 23h, na Rua Maria Antonieta dos Santos, 300, em Pinhais. Nota 4,4 no Google.">
+  <meta name="theme-color" content="#050505">
+  <meta property="og:title" content="Pizzaria das Famílias · Buffet livre em Pinhais">
+  <meta property="og:description" content="Pizza doce e salgada, porções e comida japonesa à vontade. Todos os dias, das 19h às 23h.">
+  <link rel="icon" href="assets/img/icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://images.unsplash.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;0,600;1,300;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600;700&family=Big+Shoulders+Display:wght@500;700;800;900&family=Big+Shoulders+Inline+Display:wght@700;800&family=Cormorant+Garamond:ital,wght@1,500;1,600&display=swap">
+  <link rel="modulepreload" href="assets/vendor/three.module.min.js">
+  <link rel="stylesheet" href="assets/css/style.css?v=5.1">
+  <script>
+    document.documentElement.classList.add('js');
+    if (/[?&]movimento=completo/.test(location.search)) document.documentElement.classList.add('force-motion');
+  </script>
 </head>
 <body>
+  <a class="skip" href="#casa">Pular para o conteúdo</a>
+  <canvas class="embers" aria-hidden="true" data-embers></canvas>
 
-  <!-- Loader -->
-  <div class="loader" aria-hidden="true">
-    <div class="loader__ring"></div>
-    <span class="loader__text">Forno d'Oro</span>
-  </div>
-
-  <!-- Cursor personalizado -->
-  <div class="cursor" aria-hidden="true"><span class="cursor__label"></span></div>
-
-  <!-- Barra de progresso do scroll -->
-  <div class="progress" aria-hidden="true"><span></span></div>
-
-  <!-- Navegação -->
-  <header class="nav">
-    <a href="#top" class="nav__logo">Forno <em>d'Oro</em></a>
-    <nav class="nav__links">
-      <a href="#manifesto">Filosofia</a>
-      <a href="#ritual">O Ritual</a>
-      <a href="#menu">Menu</a>
-      <a href="#forno">O Forno</a>
+  <header class="nav" data-nav>
+    <a class="nav__brand" href="#topo" aria-label="Pizzaria das Famílias, início"><img src="assets/img/logo.webp" width="554" height="500" alt="Pizzaria das Famílias"></a>
+    <nav class="nav__links" aria-label="Seções">
+      <a href="#balcao">O balcão</a>
+      <a href="#experiencias">Experiências</a>
+      <a href="#avaliacoes">Avaliações</a>
+      <a href="#bom-saber">Bom saber</a>
+      <a href="#visite">Visite</a>
     </nav>
-    <a href="#reserva" class="btn btn--small magnetic">Reservar</a>
+    <a class="btn btn--sm" href="#reservar">Reservar</a>
   </header>
 
-  <main id="top">
+  <main>
+    <!-- 1. A pizza nasce na bancada enquanto você rola -->
+    <section class="hero" id="topo" aria-labelledby="hero-title" data-hero>
+      <div class="hero__stage">
+        <canvas class="hero__canvas" data-hero-canvas aria-hidden="true"></canvas>
+        <div class="hero__oven" data-oven aria-hidden="true"></div>
+        <div class="hud" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 
-    <!-- HERO -->
-    <section class="hero">
-      <div class="hero__bg-text" aria-hidden="true">NAPOLI · ORO · FUOCO · NAPOLI · ORO · FUOCO ·</div>
+        <div class="hero__intro" data-intro>
+          <p class="label">Pinhais · PR <span class="label__sep"></span> Buffet livre</p>
+          <h1 class="hero__title" id="hero-title"><span>Pizzaria</span><span class="y">das Famílias</span></h1>
+          <p class="hero__tag">o buffet mais completo da cidade</p>
+          <ul class="hero__facts">
+            <li><b>Todo dia</b> 19h às 23h</li>
+            <li><b>A partir de</b> R$ 49,99</li>
+          </ul>
+        </div>
+        <div class="hero__dock">
+          <a class="btn" href="#reservar">Reservar mesa</a>
+          <a class="btn btn--ghost" href="#balcao">Ver o buffet</a>
+        </div>
+        <div class="hero__scroll" data-scrollcue aria-hidden="true"><span>Role para montar</span><i></i></div>
 
-      <div class="hero__content">
-        <p class="eyebrow hero__eyebrow">Pizzeria di Lusso · Desde 1987</p>
-        <h1 class="hero__title">
-          <span class="line"><span>A arte</span></span>
-          <span class="line"><span>do <em>fogo</em></span></span>
-          <span class="line"><span>e do <em>ouro</em></span></span>
-        </h1>
-        <p class="hero__sub">Massa de fermentação natural por 72 horas, ingredientes DOP e um forno a lenha a 485&nbsp;°C.</p>
-        <a href="#reserva" class="btn magnetic">Reserve sua mesa</a>
+        <ol class="steps" aria-label="Como a pizza é montada">
+          <li class="step" data-step="0"><p class="label">// 01</p><h2 class="step__t">A massa</h2><p class="step__p">Tudo começa na massa, aberta e assada para o rodízio, das 19h às 23h.</p></li>
+          <li class="step" data-step="1"><p class="label">// 02</p><h2 class="step__t">O molho</h2><p class="step__p">Molho de tomate do centro até a borda.</p></li>
+          <li class="step" data-step="2"><p class="label">// 03</p><h2 class="step__t">O queijo</h2><p class="step__p">Mussarela até a borda, para derreter no forno.</p></li>
+          <li class="step" data-step="3"><p class="label">// 04</p><h2 class="step__t">A cobertura</h2><p class="step__p">Tradicionais, especiais, nobres e doces: as quatro categorias do cardápio entram no rodízio.</p></li>
+          <li class="step" data-step="4"><p class="label">// 05</p><h2 class="step__t">O forno</h2><p class="step__p">Queijo borbulhando, borda tostada, manjericão por cima. Saiu do forno, foi para o balcão.</p></li>
+        </ol>
+        <div class="hero__final" data-final>
+          <p class="label">// 06</p>
+          <h2 class="step__t">Pronta.</h2>
+          <p class="hero__tag">E essa é só uma. No buffet, são todas.</p>
+        </div>
+
+        <div class="rail" aria-hidden="true">
+          <span class="rail__num" data-rail-num>00</span><span class="rail__of">/06</span>
+          <span class="rail__bar"><i data-rail-fill></i></span>
+        </div>
       </div>
+    </section>
 
-      <div class="hero__pizza" data-cursor="Gire">
-        <div class="hero__plate">
-          <svg class="ring" viewBox="0 0 200 200" aria-hidden="true">
-            <defs><path id="ringHero" d="M100,100 m-92,0 a92,92 0 1,1 184,0 a92,92 0 1,1 -184,0"/></defs>
-            <text><textPath href="#ringHero" textLength="574">FORNO D'ORO · PIZZERIA DI LUSSO · NAPOLI · SÃO PAULO · </textPath></text>
-          </svg>
-          <div class="hero__disc">
-            <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=1200&q=80"
-                 alt="Pizza margherita vista de cima" fetchpriority="high">
+    <!-- 2. Letreiro -->
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker__row"><div class="ticker__run">
+        <span>Buffet livre</span><span>Pizza doce e salgada</span><span>Porções</span><span>Comida japonesa</span><span>Espaço kids</span><span>Aniversariante não paga</span>
+        <span>Buffet livre</span><span>Pizza doce e salgada</span><span>Porções</span><span>Comida japonesa</span><span>Espaço kids</span><span>Aniversariante não paga</span>
+      </div></div>
+      <div class="ticker__row ticker__row--serif"><div class="ticker__run">
+        <span>tradicionais</span><span>especiais</span><span>nobres</span><span>doces</span><span>fondue de frutas</span><span>todo dia, das 19h às 23h</span>
+        <span>tradicionais</span><span>especiais</span><span>nobres</span><span>doces</span><span>fondue de frutas</span><span>todo dia, das 19h às 23h</span>
+      </div></div>
+    </div>
+
+    <!-- 3. A casa -->
+    <section class="casa" id="casa" aria-labelledby="casa-title">
+      <div class="casa__text">
+        <p class="label" data-reveal>// A casa</p>
+        <h2 class="statement" id="casa-title" data-reveal>Uma fatia é pouco. <em>Aqui é à vontade.</em></h2>
+        <p class="casa__p" data-reveal>Somos uma pizzaria em Pinhais e o nosso principal serviço é o buffet livre, todos os dias, das 19h às 23h. Também atendemos à la carte, delivery e retirada no balcão.</p>
+        <p class="casa__p" data-reveal>Valorizamos o conforto, a qualidade, o aconchego, a excelência e, principalmente, a família, seja ela biológica ou do coração.</p>
+      </div>
+      <div class="casa__mark" data-tilt aria-hidden="true">
+        <div class="casa__halo"></div>
+        <img src="assets/img/logo.webp" width="554" height="500" alt="" loading="lazy">
+      </div>
+    </section>
+
+    <!-- 4. Números -->
+    <section class="stats" aria-label="A casa em números">
+      <div class="stat" data-reveal><p class="label">// 01</p><p class="stat__n"><span data-count="7">7</span></p><p class="stat__t">Dias por semana</p><p class="stat__p">Buffet livre todos os dias.</p></div>
+      <div class="stat" data-reveal><p class="label">// 02</p><p class="stat__n"><span data-count="4">4</span>h</p><p class="stat__t">De buffet</p><p class="stat__p">Das 19h às 23h.</p></div>
+      <div class="stat" data-reveal><p class="label">// 03</p><p class="stat__n"><span data-count="4">4</span></p><p class="stat__t">Categorias de pizza</p><p class="stat__p">Tradicionais, especiais, nobres e doces.</p></div>
+      <div class="stat" data-reveal><p class="label">// 04</p><p class="stat__n"><span data-count="10">10</span></p><p class="stat__t">Convidados <mark>pagantes</mark></p><p class="stat__p">e o aniversariante não paga.</p></div>
+    </section>
+
+    <!-- 5. O balcão -->
+    <section class="balcao" id="balcao" aria-labelledby="balcao-title">
+      <div class="head">
+        <p class="label" data-reveal>// O balcão</p>
+        <h2 class="h2" id="balcao-title" data-reveal>Tudo à <span class="y">vontade.</span></h2>
+        <p class="head__p" data-reveal>Pizza, porção, japonês e sobremesa no mesmo buffet, pelo mesmo preço. A disponibilidade dos itens pode variar durante a noite.</p>
+      </div>
+      <div class="cards">
+        <article class="card" data-tilt data-reveal>
+          <div class="card__art">
+            <svg viewBox="0 0 160 160" aria-hidden="true">
+              <path pathLength="1" d="M26 44 Q80 18 134 44 L80 146 Z"/>
+              <path pathLength="1" d="M34 55 Q80 33 126 55"/>
+              <circle pathLength="1" cx="70" cy="74" r="10"/><circle pathLength="1" cx="98" cy="66" r="8"/><circle pathLength="1" cx="83" cy="104" r="9"/>
+              <path pathLength="1" d="M58 60 q-2 16 5 22 M110 58 q3 12 -3 18"/>
+            </svg>
+          </div>
+          <p class="label">// 01</p>
+          <h3 class="card__t">Pizzas salgadas</h3>
+          <p class="card__p">Tradicionais, especiais e nobres, como picanha, salmão e presunto e queijo.</p>
+        </article>
+        <article class="card" data-tilt data-reveal>
+          <div class="card__art">
+            <svg viewBox="0 0 160 160" aria-hidden="true">
+              <path pathLength="1" d="M26 44 Q80 18 134 44 L80 146 Z"/>
+              <path pathLength="1" d="M34 55 Q80 33 126 55"/>
+              <path pathLength="1" d="M66 70 c-8 -8 -16 4 0 14 c16 -10 8 -22 0 -14 Z M96 78 c-7 -7 -14 4 0 12 c14 -8 7 -19 0 -12 Z"/>
+              <path pathLength="1" d="M48 66 l10 8 l10 -8 l10 8 l10 -8 l10 8 l10 -8"/>
+              <path pathLength="1" d="M80 112 v14 M74 118 h12"/>
+            </svg>
+          </div>
+          <p class="label">// 02</p>
+          <h3 class="card__t">Doces e fondue</h3>
+          <p class="card__p">A quarta categoria do rodízio: pizzas doces, como a de morango. E de sobremesa, fondue de frutas.</p>
+        </article>
+        <article class="card" data-tilt data-reveal>
+          <div class="card__art">
+            <svg viewBox="0 0 160 160" aria-hidden="true">
+              <path pathLength="1" d="M46 78 L114 78 L104 144 L56 144 Z"/>
+              <path pathLength="1" d="M56 78 L50 30 M68 78 L66 22 M80 78 L82 26 M92 78 L97 32 M104 78 L112 40"/>
+              <path pathLength="1" d="M46 78 Q80 98 114 78"/>
+              <circle pathLength="1" cx="80" cy="118" r="10"/>
+            </svg>
+          </div>
+          <p class="label">// 03</p>
+          <h3 class="card__t">Porções fritas</h3>
+          <p class="card__p">Peixe, batata frita, polenta, aipim, bolinho de aipim com linguiça, frango a passarinho e anéis de cebola.</p>
+        </article>
+        <article class="card" data-tilt data-reveal>
+          <div class="card__art">
+            <svg viewBox="0 0 160 160" aria-hidden="true">
+              <ellipse pathLength="1" cx="58" cy="78" rx="24" ry="11"/><path pathLength="1" d="M34 78 V108 Q58 124 82 108 V78"/><ellipse pathLength="1" cx="58" cy="78" rx="11" ry="5"/>
+              <ellipse pathLength="1" cx="104" cy="96" rx="24" ry="11"/><path pathLength="1" d="M80 96 V124 Q104 140 128 124 V96"/><ellipse pathLength="1" cx="104" cy="96" rx="11" ry="5"/>
+              <path pathLength="1" d="M40 30 L132 62 M48 22 L138 52"/>
+            </svg>
+          </div>
+          <p class="label">// 04</p>
+          <h3 class="card__t">Comida japonesa</h3>
+          <p class="card__p">Hot roll, hot philadelphia, uramaki philadelphia, baterá e especial de salmão, especial de Doritos, hossomaki de salmão grelhado e joy de goiabada e morango.</p>
+        </article>
+      </div>
+      <p class="fine">Bebidas não estão inclusas no valor do buffet.</p>
+    </section>
+
+    <!-- 6. Experiências -->
+    <section class="exp" id="experiencias" aria-labelledby="exp-title">
+      <div class="head">
+        <p class="label" data-reveal>// Experiências</p>
+        <h2 class="h2" id="exp-title" data-reveal>Para a família <span class="y">toda.</span></h2>
+      </div>
+      <div class="exp__grid">
+        <article class="panel" data-reveal>
+          <div class="panel__top">
+            <p class="label">// Espaço kids</p>
+            <svg class="panel__art" viewBox="0 0 120 120" aria-hidden="true"><ellipse pathLength="1" cx="44" cy="40" rx="18" ry="22"/><path pathLength="1" d="M44 62 l-4 6 h8 Z M44 68 q-8 18 6 40"/><ellipse pathLength="1" cx="80" cy="34" rx="15" ry="19"/><path pathLength="1" d="M80 53 l-3 5 h6 Z M80 58 q10 20 -4 46"/></svg>
+          </div>
+          <p class="panel__n">0<span>a 4 anos</span></p>
+          <h3 class="panel__t">não pagam</h3>
+          <ul class="panel__list"><li>De 5 a 8 anos, meia.</li><li>Espaço kids monitorado, já incluso no buffet.</li><li>Em alguns casos podemos pedir documento.</li></ul>
+        </article>
+        <article class="panel panel--y" data-reveal>
+          <div class="panel__top">
+            <p class="label">// Aniversário</p>
+            <svg class="panel__art" viewBox="0 0 120 120" aria-hidden="true"><path pathLength="1" d="M18 58 Q60 40 102 58 L60 114 Z"/><path pathLength="1" d="M60 50 V24"/><path pathLength="1" d="M60 22 c-6 -6 -2 -14 0 -16 c2 2 6 10 0 16 Z"/><circle pathLength="1" cx="48" cy="74" r="6"/><circle pathLength="1" cx="72" cy="80" r="5"/></svg>
+          </div>
+          <p class="panel__n">R$0<span>para o aniversariante</span></p>
+          <h3 class="panel__t">com 10 convidados <mark>pagantes</mark></h3>
+          <ul class="panel__list"><li>Pizza broto com velinha.</li><li>Parabéns cantado pela nossa equipe.</li><li>Pode trazer bolo, docinhos e decoração, sem ocupar mesas extras.</li></ul>
+          <a class="btn btn--dark" href="#reservar">Reservar o aniversário</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- 7. Avaliações -->
+    <section class="reviews" id="avaliacoes" aria-labelledby="rev-title">
+      <div class="head">
+        <p class="label" data-reveal>// Avaliações no Google</p>
+        <h2 class="h2" id="rev-title" data-reveal>O que dizem <span class="y">as famílias.</span></h2>
+      </div>
+      <div class="reviews__grid">
+        <div class="score" data-reveal>
+          <p class="score__n">4,4</p>
+          <p class="stars" style="--r: 4.4" role="img" aria-label="Nota 4,4 de 5">★★★★★</p>
+          <p class="score__t"><b>734 avaliações</b> no Google</p>
+          <div class="score__cta">
+            <a class="btn" href="https://share.google/fUitSAdfr2cEgQslO" target="_blank" rel="noopener">Ver as avaliações</a>
+            <a class="btn btn--ghost" href="https://share.google/fUitSAdfr2cEgQslO" target="_blank" rel="noopener">Deixe a sua</a>
           </div>
         </div>
+        <figure class="quote" data-reveal>
+          <blockquote>“Já é minha pizzaria favorita da cidade!”</blockquote>
+          <figcaption><b>Renata Mello</b> · Local Guide · avaliação no Google</figcaption>
+        </figure>
       </div>
-
-      <div class="hero__scroll" aria-hidden="true">
-        <span>Role para descobrir</span>
-        <i></i>
-      </div>
+      <p class="label reviews__sub" data-reveal>// O que mais aparece nas avaliações</p>
+      <ul class="themes">
+        <li class="theme" data-reveal><span class="theme__n">01</span><h3 class="theme__t">Variedade no buffet</h3><p>Pizza, porções e comida japonesa no mesmo rodízio: o buffet é o assunto mais citado.</p></li>
+        <li class="theme" data-reveal><span class="theme__n">02</span><h3 class="theme__t">Espaço kids</h3><p>Lembrado em várias avaliações de quem vai com as crianças.</p></li>
+        <li class="theme" data-reveal><span class="theme__n">03</span><h3 class="theme__t">Pizzas doces</h3><p>Muita gente destaca as doces e as pizzas bem recheadas e quentinhas.</p></li>
+        <li class="theme" data-reveal><span class="theme__n">04</span><h3 class="theme__t">Aniversários</h3><p>Mesas reservadas com capricho e atendimento elogiado em quem foi comemorar.</p></li>
+      </ul>
+      <p class="fine">Resumo das avaliações públicas da pizzaria no Google, em outubro de 2026.</p>
     </section>
 
-    <!-- MANIFESTO -->
-    <section class="manifesto" id="manifesto">
-      <p class="eyebrow">La nostra filosofia</p>
-      <p class="manifesto__text split-words">
-        Não fazemos pizza para matar a fome. Fazemos para criar memória. Cada disco nasce de farinha moída em pedra, água de nascente e tempo — muito tempo. O resto é fogo, mãos e paciência.
-      </p>
-      <div class="stats">
-        <div class="stat"><span class="stat__num" data-count="72">72</span><span class="stat__unit">h</span><p>de fermentação natural</p></div>
-        <div class="stat"><span class="stat__num" data-count="485">485</span><span class="stat__unit">°C</span><p>no coração do forno</p></div>
-        <div class="stat"><span class="stat__num" data-count="90">90</span><span class="stat__unit">s</span><p>para a pizza perfeita</p></div>
+    <!-- 8. Bom saber -->
+    <section class="saber" id="bom-saber" aria-labelledby="saber-title">
+      <div class="head">
+        <p class="label" data-reveal>// Bom saber</p>
+        <h2 class="h2" id="saber-title" data-reveal>Antes de <span class="y">vir.</span></h2>
       </div>
+      <ul class="rows" data-rows>
+        <li class="row"><button type="button" aria-expanded="false"><span class="row__k">Reservas</span><span class="row__t">Reservamos mesas a partir de 10 pessoas</span><span class="row__m">Até 20h</span><i aria-hidden="true"></i></button><div class="row__a"><div><p>A reserva vale para o buffet livre, com horário máximo às 20h. Para grupos menores, é só chegar a partir das 19h.</p></div></div></li>
+        <li class="row"><button type="button" aria-expanded="false"><span class="row__k">Sinal</span><span class="row__t">Não cobramos sinal</span><span class="row__m">15 min de tolerância</span><i aria-hidden="true"></i></button><div class="row__a"><div><p>Com atraso acima de 15 minutos, ou se nem todos os lugares reservados forem ocupados, eles são cedidos aos clientes em espera.</p></div></div></li>
+        <li class="row"><button type="button" aria-expanded="false"><span class="row__k">Antecedência</span><span class="row__t">Reserve com pelo menos um dia de antecedência</span><span class="row__m">Recomendado</span><i aria-hidden="true"></i></button><div class="row__a"><div><p>Assim garantimos a melhor experiência para o seu grupo.</p></div></div></li>
+        <li class="row"><button type="button" aria-expanded="false"><span class="row__k">Decoração</span><span class="row__t">Pode trazer bolo, docinhos e decoração</span><span class="row__m">Sem mesas extras</span><i aria-hidden="true"></i></button><div class="row__a"><div><p>Desde que não atrapalhem o funcionamento do salão nem ocupem mesas extras.</p></div></div></li>
+        <li class="row"><button type="button" aria-expanded="false"><span class="row__k">Feriados</span><span class="row__t">Os valores podem mudar em feriados</span><span class="row__m">Aviso no Instagram</span><i aria-hidden="true"></i></button><div class="row__a"><div><p>Quando isso acontece, avisamos com antecedência nas nossas redes sociais.</p></div></div></li>
+        <li class="row"><button type="button" aria-expanded="false"><span class="row__k">Bebidas</span><span class="row__t">Bebidas não estão inclusas no buffet</span><span class="row__m">À parte</span><i aria-hidden="true"></i></button><div class="row__a"><div><p>As bebidas são cobradas à parte do valor do buffet livre.</p></div></div></li>
+        <li class="row"><button type="button" aria-expanded="false"><span class="row__k">Documentos</span><span class="row__t">Podemos pedir documento</span><span class="row__m">Em alguns casos</span><i aria-hidden="true"></i></button><div class="row__a"><div><p>Para a meia e a gratuidade das crianças, e a carteirinha ou um comprovante para o desconto de 15% de bariátricos.</p></div></div></li>
+        <li class="row"><button type="button" aria-expanded="false"><span class="row__k">Em casa</span><span class="row__t">À la carte, delivery e retirada no balcão</span><span class="row__m">Além do buffet</span><i aria-hidden="true"></i></button><div class="row__a"><div><p>Fale com a gente pelo Instagram <a class="link" href="https://www.instagram.com/pizzariadasfamilias_/" target="_blank" rel="noopener">@pizzariadasfamilias_</a>.</p></div></div></li>
+      </ul>
     </section>
 
-    <!-- RITUAL (seção fixa: cada ingrediente aparece com o scroll) -->
-    <section class="ritual" id="ritual">
-      <div class="ritual__pin">
-        <div class="ritual__steps">
-          <p class="eyebrow">Il rituale</p>
-          <ol class="steps">
-            <li class="step is-active">
-              <span class="step__n">01</span>
-              <h3>Impasto</h3>
-              <p>Farinha tipo 00 moída em pedra, aberta à mão. Nunca rolo, nunca pressa.</p>
-            </li>
-            <li class="step">
-              <span class="step__n">02</span>
-              <h3>Pomodoro San Marzano</h3>
-              <p>Tomates DOP do Vesúvio, esmagados à mão com sal marinho de Trapani.</p>
-            </li>
-            <li class="step">
-              <span class="step__n">03</span>
-              <h3>Mozzarella di Bufala</h3>
-              <p>Chega da Campânia três vezes por semana, ainda morna.</p>
-            </li>
-            <li class="step">
-              <span class="step__n">04</span>
-              <h3>Basilico &amp; Olio</h3>
-              <p>Manjericão da nossa horta e azeite extravirgem da Puglia.</p>
-            </li>
-            <li class="step">
-              <span class="step__n">05</span>
-              <h3>Foglia d'Oro</h3>
-              <p>O toque final: folhas de ouro comestível 24 quilates.</p>
-            </li>
-          </ol>
+    <!-- 9. Reserva -->
+    <section class="reserve" id="reservar" aria-labelledby="reservar-title">
+      <div class="head">
+        <p class="label" data-reveal>// Reserva</p>
+        <h2 class="h2" id="reservar-title" data-reveal>Reserve a <span class="y">mesa.</span></h2>
+        <p class="head__p" data-reveal>Para grupos de 10 pessoas ou mais, até as 20h e sem sinal. Escolha o dia e o horário, e a mensagem sai pronta para a gente confirmar. Se preferir, ligue: <a class="link" href="tel:+554136696782">(41) 3669-6782</a>.</p>
+      </div>
+      <form class="booking" data-booking data-ui novalidate>
+        <fieldset class="booking__cal">
+          <legend class="label">// Dia</legend>
+          <div class="cal__week" aria-hidden="true"><span>Dom</span><span>Seg</span><span>Ter</span><span>Qua</span><span>Qui</span><span>Sex</span><span>Sáb</span></div>
+          <div class="cal__days" data-cal></div>
+        </fieldset>
+        <div class="booking__side">
+          <fieldset>
+            <legend class="label">// Horário de chegada</legend>
+            <div class="slots">
+              <label><input type="radio" name="hora" value="19h"><span>19h</span></label>
+              <label><input type="radio" name="hora" value="19h30"><span>19h30</span></label>
+              <label><input type="radio" name="hora" value="20h"><span>20h</span></label>
+            </div>
+          </fieldset>
+          <div class="stepper" data-people><span id="l-pe">Pessoas</span><div class="stepper__c"><button type="button" data-pstep="-1" aria-label="Menos uma pessoa">−</button><output aria-labelledby="l-pe" aria-live="polite" data-people-val>10</output><button type="button" data-pstep="1" aria-label="Mais uma pessoa">+</button></div></div>
+          <label class="vh" for="r-nome">Seu nome</label>
+          <input class="field" id="r-nome" name="nome" type="text" autocomplete="name" placeholder="Seu nome">
+          <label class="switch"><input type="checkbox" name="niver"><span class="switch__ui" aria-hidden="true"></span><span>É aniversário</span></label>
+          <p class="booking__sum" data-booking-sum>Escolha o dia e o horário.</p>
+          <button class="btn btn--block" type="submit">Enviar pedido de reserva</button>
+          <p class="booking__status" data-booking-status role="status"></p>
         </div>
-
-        <div class="ritual__stage">
-          <div class="ritual__glow"></div>
-          <svg class="ring ring--ritual" viewBox="0 0 200 200" aria-hidden="true">
-            <defs><path id="ringRitual" d="M100,100 m-92,0 a92,92 0 1,1 184,0 a92,92 0 1,1 -184,0"/></defs>
-            <text><textPath href="#ringRitual" textLength="574">IMPASTO · POMODORO · MOZZARELLA · BASILICO · ORO · </textPath></text>
-          </svg>
-          <div class="ritual__disc">
-            <div class="frame"><img src="https://images.unsplash.com/photo-1586444248902-2f64eddc13df?auto=format&fit=crop&w=1000&q=80" alt="Massa de pão artesanal enfarinhada"></div>
-            <div class="frame"><img src="https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=1000&q=80" alt="Tomates frescos"></div>
-            <div class="frame"><img src="https://images.unsplash.com/photo-1541745537411-b8046dc6d66c?auto=format&fit=crop&w=1000&q=80" alt="Mozzarella derretida puxando"></div>
-            <div class="frame"><img src="https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=1000&q=80" alt="Azeite extravirgem e azeitonas"></div>
-            <div class="frame"><img src="https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?auto=format&fit=crop&w=1000&q=80" alt="Pizza margherita finalizada"></div>
-          </div>
-          <div class="ritual__counter"><span id="stepNow">01</span> / 05</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- MENU HORIZONTAL -->
-    <section class="menu" id="menu">
-      <div class="menu__pin">
-        <div class="menu__head">
-          <p class="eyebrow">Il menù</p>
-          <h2>Assinaturas <em>da casa</em></h2>
-          <p class="menu__hint">Continue rolando →</p>
-        </div>
-        <div class="menu__track">
-          <article class="card" data-cursor="Ver">
-            <div class="card__visual"><img src="https://images.unsplash.com/photo-1595854341625-f33ee10dbf94?auto=format&fit=crop&w=900&q=80" alt="Pizza margherita"></div>
-            <div class="card__body">
-              <span class="card__n">I</span>
-              <h3>Margherita d'Oro</h3>
-              <p>San Marzano, búfala, manjericão e folha de ouro 24k.</p>
-              <span class="card__price">R$ 189</span>
-            </div>
-          </article>
-          <article class="card" data-cursor="Ver">
-            <div class="card__visual"><img src="https://images.unsplash.com/photo-1620374645310-f9d97e733268?auto=format&fit=crop&w=900&q=80" alt="Pizza de cogumelos e trufa"></div>
-            <div class="card__body">
-              <span class="card__n">II</span>
-              <h3>Tartufo Nero</h3>
-              <p>Fior di latte, cogumelos selvagens, trufa negra de Norcia ralada na mesa.</p>
-              <span class="card__price">R$ 298</span>
-            </div>
-          </article>
-          <article class="card" data-cursor="Ver">
-            <div class="card__visual"><img src="https://images.unsplash.com/photo-1528137871618-79d2761e3fd5?auto=format&fit=crop&w=900&q=80" alt="Pizza com presunto cru"></div>
-            <div class="card__body">
-              <span class="card__n">III</span>
-              <h3>Parma 36 Mesi</h3>
-              <p>Presunto de Parma curado por 36 meses, rúcula selvagem e burrata.</p>
-              <span class="card__price">R$ 236</span>
-            </div>
-          </article>
-          <article class="card" data-cursor="Ver">
-            <div class="card__visual"><img src="https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?auto=format&fit=crop&w=900&q=80" alt="Pizza branca com ricota e espinafre"></div>
-            <div class="card__body">
-              <span class="card__n">IV</span>
-              <h3>Bianca Reale</h3>
-              <p>Ricota de búfala, espinafre baby, nozes e raspas de limão siciliano.</p>
-              <span class="card__price">R$ 224</span>
-            </div>
-          </article>
-          <article class="card" data-cursor="Ver">
-            <div class="card__visual"><img src="https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&w=900&q=80" alt="Pizza de salame picante"></div>
-            <div class="card__body">
-              <span class="card__n">V</span>
-              <h3>Diavola Reale</h3>
-              <p>'Nduja calabresa, salame picante e mel de pimenta.</p>
-              <span class="card__price">R$ 212</span>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- FORNO -->
-    <section class="forno" id="forno">
-      <canvas class="embers" aria-hidden="true"></canvas>
-      <div class="forno__inner">
-        <p class="eyebrow">Il forno</p>
-        <h2 class="forno__title">
-          <span class="reveal-line"><span>Construído</span></span>
-          <span class="reveal-line"><span>em Nápoles,</span></span>
-          <span class="reveal-line"><span><em>tijolo por tijolo.</em></span></span>
-        </h2>
-        <p class="forno__text">Nosso forno foi erguido por mestres forneiros napolitanos com argila do Vesúvio. Queima carvalho e oliveira, e nunca se apaga — nem quando estamos fechados.</p>
-      </div>
-      <div class="forno__arch">
-        <img loading="lazy" src="https://images.unsplash.com/photo-1579751626657-72bc17010498?auto=format&fit=crop&w=1000&q=80" alt="Pizza assando no forno a lenha">
-        <div class="forno__fire" aria-hidden="true"></div>
-      </div>
-    </section>
-
-    <!-- DEPOIMENTO / PARALLAX -->
-    <section class="quote">
-      <div class="quote__bg" aria-hidden="true">
-        <img loading="lazy" src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1800&q=75" alt="">
-      </div>
-      <div class="quote__layer quote__layer--1" aria-hidden="true">Bellissima</div>
-      <div class="quote__layer quote__layer--2" aria-hidden="true">Perfetta</div>
-      <blockquote>
-        <p>“A melhor pizza que comi fora de Nápoles. Talvez a melhor de todas.”</p>
-        <cite>— Guia Gastronômico, 2026</cite>
-      </blockquote>
-    </section>
-
-    <!-- RESERVA -->
-    <section class="reserva" id="reserva">
-      <div class="reserva__bg" aria-hidden="true">
-        <img loading="lazy" src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1800&q=75" alt="">
-      </div>
-      <div class="reserva__inner">
-        <p class="eyebrow">Prenotazione</p>
-        <h2>Uma mesa <em>espera</em> por você</h2>
-        <form class="form" novalidate>
-          <label>Nome<input type="text" name="nome" placeholder="Seu nome" autocomplete="given-name" required></label>
-          <label>Data<input type="date" name="data" required></label>
-          <label>Pessoas
-            <select name="pessoas">
-              <option>2 pessoas</option><option>3 pessoas</option><option>4 pessoas</option><option>5+ pessoas</option>
-            </select>
-          </label>
-          <button type="submit" class="btn magnetic">Confirmar reserva</button>
-          <p class="form__msg" role="status" aria-live="polite"></p>
-        </form>
-      </div>
+      </form>
     </section>
   </main>
 
-  <footer class="footer">
-    <div class="footer__big">Forno <em>d'Oro</em></div>
-    <div class="footer__cols">
-      <p>Rua Oscar Freire, 000<br>São Paulo · SP</p>
-      <p>Ter a Dom · 19h às 00h<br>Fechado às segundas</p>
-      <p>© 2026 Forno d'Oro<br>Fotos: Unsplash</p>
+  <!-- 10. Visite -->
+  <footer class="visit" id="visite" aria-labelledby="visit-title">
+    <div class="visit__top">
+      <p class="label">// Visite</p>
+      <h2 class="visit__title" id="visit-title">Venha com a <span class="y">família.</span></h2>
+    </div>
+    <div class="visit__cols">
+      <div><p class="label">Endereço</p><p>Rua Maria Antonieta dos Santos, 300<br>Maria Antonieta · Pinhais, PR</p><a class="link" href="https://www.google.com/maps/search/?api=1&amp;query=Pizzaria%20das%20Fam%C3%ADlias%20Rua%20Maria%20Antonieta%20dos%20Santos%20300%20Pinhais%20PR" target="_blank" rel="noopener">Como chegar</a></div>
+      <div><p class="label">Horário</p><p>Buffet livre todos os dias<br>das 19h às 23h</p><p class="muted">À la carte, delivery e retirada no balcão</p></div>
+      <div><p class="label">Contato</p><p><a class="link" href="tel:+554136696782">(41) 3669-6782</a></p><p><a class="link" href="https://www.instagram.com/pizzariadasfamilias_/" target="_blank" rel="noopener">@pizzariadasfamilias_</a></p></div>
+    </div>
+    <div class="visit__marquee" aria-hidden="true"><div class="visit__run"><span>Pizzaria das Famílias</span><span>Pizzaria das Famílias</span><span>Pizzaria das Famílias</span><span>Pizzaria das Famílias</span></div></div>
+    <div class="visit__base">
+      <img src="assets/img/logo.webp" width="554" height="500" alt="" loading="lazy">
+      <p class="muted">© <span data-year>2026</span> <span translate="no">Pizzaria das Famílias</span> · Pinhais, PR</p>
+      <div class="visit__actions">
+        <button class="btn btn--sm btn--ghost" type="button" data-pause aria-pressed="false">Pausar animações</button>
+        <a class="btn btn--sm btn--ghost" href="#topo">Voltar ao topo</a>
+      </div>
     </div>
   </footer>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
-  <script src="script.js"></script>
+  <script type="module" src="assets/js/main.js?v=5.1"></script>
 </body>
 </html>
