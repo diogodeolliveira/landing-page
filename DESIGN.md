@@ -14,7 +14,7 @@ Site em `site/`, refeito do zero a partir dos três vídeos de referência (zip 
    - **O forno**: orégano em chuva lenta, o brilho do forno doura borda e queijo, e o manjericão cai devagar, balançando como folha.
    - **Pronta**: a câmera se aproxima em três quartos, com vapor e um leve movimento de câmera e luz (sem giro contínuo).
    Os botões "Reservar mesa" e "Ver o buffet" ficam fixos no canto durante toda a sequência. A rolagem nunca é bloqueada; com animação ligada, a história acompanha a rolagem com uma leve suavização. A vista explodida "Por dentro" e as etiquetas saíram, porque a nova narrativa termina na revelação.
-2. Letreiro, **A casa** (frase + logo aceso), **números** acesos (7 dias, 4h, 4 categorias: tradicionais, especiais, nobres e doces; 10 convidados **pagantes** e o aniversariante não paga).
+2. Letreiro, **A casa** (frase + logo aceso), **números** acesos (7 dias, 4h, 4 categorias: tradicionais, especiais, nobres e doces; porções e comida japonesa à vontade, com um ∞ em neon; 10 convidados **pagantes** e o aniversariante não paga). A seção A casa tem ao fundo a foto da fachada à noite (`site/assets/img/fachada-noite.webp`), com o texto sobre o céu escuro à esquerda.
 3. **O balcão**: 4 cartões com desenhos em linha amarela que se desenham ao entrar na tela.
 4. **Experiências**: espaço kids e aniversário.
 5. **Avaliações no Google**: nota 4,4 com 734 avaliações (outubro de 2026), um trecho curto em destaque com o nome da autora e um resumo, em palavras nossas, do que mais aparece nas avaliações. Os textos completos ficam no Google (botão "Ver as avaliações"). A calculadora de preço foi retirada a pedido.

@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600;700&family=Big+Shoulders+Display:wght@500;700;800;900&family=Big+Shoulders+Inline+Display:wght@700;800&family=Cormorant+Garamond:ital,wght@1,500;1,600&display=swap">
   <link rel="modulepreload" href="assets/vendor/three.module.min.js">
-  <link rel="stylesheet" href="assets/css/style.css?v=5.1">
+  <link rel="stylesheet" href="assets/css/style.css?v=5.6">
   <script>
     document.documentElement.classList.add('js');
     if (/[?&]movimento=completo/.test(location.search)) document.documentElement.classList.add('force-motion');
@@ -92,15 +92,14 @@
 
     <!-- 3. A casa -->
     <section class="casa" id="casa" aria-labelledby="casa-title">
+      <div class="casa__bg" data-reveal>
+        <img src="assets/img/fachada-noite.webp" width="1983" height="793" alt="Fachada da Pizzaria das Famílias à noite, com o letreiro e as luzes acesas" loading="lazy" decoding="async">
+      </div>
       <div class="casa__text">
         <p class="label" data-reveal>// A casa</p>
         <h2 class="statement" id="casa-title" data-reveal>Uma fatia é pouco. <em>Aqui é à vontade.</em></h2>
         <p class="casa__p" data-reveal>Somos uma pizzaria em Pinhais e o nosso principal serviço é o buffet livre, todos os dias, das 19h às 23h. Também atendemos à la carte, delivery e retirada no balcão.</p>
         <p class="casa__p" data-reveal>Valorizamos o conforto, a qualidade, o aconchego, a excelência e, principalmente, a família, seja ela biológica ou do coração.</p>
-      </div>
-      <div class="casa__mark" data-tilt aria-hidden="true">
-        <div class="casa__halo"></div>
-        <img src="assets/img/logo.webp" width="554" height="500" alt="" loading="lazy">
       </div>
     </section>
 
@@ -109,7 +108,8 @@
       <div class="stat" data-reveal><p class="label">// 01</p><p class="stat__n"><span data-count="7">7</span></p><p class="stat__t">Dias por semana</p><p class="stat__p">Buffet livre todos os dias.</p></div>
       <div class="stat" data-reveal><p class="label">// 02</p><p class="stat__n"><span data-count="4">4</span>h</p><p class="stat__t">De buffet</p><p class="stat__p">Das 19h às 23h.</p></div>
       <div class="stat" data-reveal><p class="label">// 03</p><p class="stat__n"><span data-count="4">4</span></p><p class="stat__t">Categorias de pizza</p><p class="stat__p">Tradicionais, especiais, nobres e doces.</p></div>
-      <div class="stat" data-reveal><p class="label">// 04</p><p class="stat__n"><span data-count="10">10</span></p><p class="stat__t">Convidados <mark>pagantes</mark></p><p class="stat__p">e o aniversariante não paga.</p></div>
+      <div class="stat" data-reveal><p class="label">// 04</p><p class="stat__n stat__n--inf"><svg viewBox="0 0 124 62" role="img" aria-label="À vontade"><path d="M62 31C47 9 12 9 12 31s35 22 50 0 50-22 50 0-35 22-50 0z"/><path class="inline" d="M62 31C47 9 12 9 12 31s35 22 50 0 50-22 50 0-35 22-50 0z"/></svg></p><p class="stat__t">Porções e comida japonesa</p><p class="stat__p">À vontade, no mesmo buffet.</p></div>
+      <div class="stat" data-reveal><p class="label">// 05</p><p class="stat__n"><span data-count="10">10</span></p><p class="stat__t">Convidados <mark>pagantes</mark></p><p class="stat__p">e o aniversariante não paga.</p></div>
     </section>
 
     <!-- 5. O balcão -->
@@ -310,6 +310,6 @@
     </div>
   </footer>
 
-  <script type="module" src="assets/js/main.js?v=5.1"></script>
+  <script type="module" src="assets/js/main.js?v=5.6"></script>
 </body>
 </html>

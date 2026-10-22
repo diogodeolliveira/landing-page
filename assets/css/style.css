@@ -173,19 +173,30 @@ main, footer { position: relative; z-index: 1; }
 .visit__actions { display: flex; flex-wrap: wrap; gap: 10px; }
 
 /* ---------- 3. casa ---------- */
-.casa { display: grid; grid-template-columns: 7fr 5fr; gap: clamp(40px, 6vw, 120px); align-items: center; padding: var(--section) var(--pad); }
-.casa__text .statement { margin-top: 22px; }
-.casa__p { margin-top: 24px; max-width: 52ch; color: rgba(244, 244, 242, 0.82); font-size: 20px; }
-.casa__mark { position: relative; aspect-ratio: 1; display: grid; place-items: center; transform-style: preserve-3d; transition: transform 400ms var(--ease-out); }
-.casa__halo { position: absolute; inset: 6%; border-radius: 50%; background: radial-gradient(circle, rgba(252, 241, 12, 0.22), transparent 62%); box-shadow: inset 0 0 0 1px var(--line-y); }
-.casa__halo::after { content: ""; position: absolute; inset: 9%; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(252, 241, 12, 0.18); }
-.casa__mark img { position: relative; width: 74%; filter: drop-shadow(0 0 30px rgba(252, 241, 12, 0.25)); }
+/* the night façade fills the section; the text sits on the dark sky to the left */
+.casa { position: relative; isolation: isolate; overflow: hidden; display: grid; align-items: center; min-height: clamp(520px, 48.6vw, 1100px); padding: clamp(72px, 8vw, 130px) var(--pad); }
+.casa__bg { position: absolute; inset: 0; z-index: -1; background: #000; }
+/* anchored left: the black sky is never cropped, only the far end of the building when the screen is narrow */
+.casa__bg img { width: 100%; height: 100%; object-fit: cover; object-position: 0% 50%; }
+.casa__bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, var(--bg) 0%, rgba(5, 5, 5, 0) 14%, rgba(5, 5, 5, 0) 86%, var(--bg) 100%); } /* taste-skill-ignore: scrim under text, edges melt into the page */
+.motion .casa__bg[data-reveal] { transform: none; transition: opacity 1200ms var(--ease-out); }
+.motion .casa__bg img { transform: scale(1.06); transition: transform 2200ms var(--ease-out); }
+.motion .casa__bg.is-in img { transform: none; }
+/* the section is at least 48.6vw tall, so the building never starts before ~44vw: the text stops short of it */
+.casa__text { position: relative; max-width: min(calc(42vw - var(--pad)), 540px); }
+.casa__text .statement { margin-top: 20px; font-size: clamp(36px, 3.8vw, 64px); }
+.casa__p { margin-top: 20px; color: rgba(244, 244, 242, 0.86); font-size: clamp(17px, 1.25vw, 20px); }
 
 /* ---------- 4. stats ---------- */
-.stats { display: grid; grid-template-columns: repeat(4, 1fr); margin: 0 var(--pad); box-shadow: 0 -1px 0 var(--line), 0 1px 0 var(--line); }
+.stats { display: grid; grid-template-columns: repeat(5, 1fr); margin: 0 var(--pad); box-shadow: 0 -1px 0 var(--line), 0 1px 0 var(--line); }
 .stat { padding: clamp(32px, 4vw, 56px) clamp(16px, 2vw, 32px); box-shadow: 1px 0 0 var(--line); }
 .stat:last-child { box-shadow: none; }
 .stat__n { margin-top: 18px; font: 800 clamp(84px, 9vw, 150px)/0.85 var(--f-inline); color: var(--y); text-shadow: 0 0 24px var(--y-glow), 0 0 60px rgba(252, 241, 12, 0.2); font-variant-numeric: tabular-nums; }
+/* "à vontade": an infinity drawn like the neon digits (yellow stroke with the dark inline cut) */
+.stat__n--inf { display: flex; align-items: center; height: 0.85em; }
+.stat__n--inf svg { display: block; height: 0.62em; width: auto; overflow: visible; filter: drop-shadow(0 0 12px var(--y-glow)) drop-shadow(0 0 30px rgba(252, 241, 12, 0.2)); }
+.stat__n--inf path { fill: none; stroke: var(--y); stroke-width: 10; stroke-linecap: round; stroke-linejoin: round; }
+.stat__n--inf path.inline { stroke: var(--bg); stroke-width: 2.4; }
 .stat__t { margin-top: 18px; font: 700 20px/1.1 var(--f-label); letter-spacing: 0.14em; text-transform: uppercase; }
 .stat__p { margin-top: 8px; color: var(--muted); font-size: 16px; max-width: 26ch; }
 
@@ -340,6 +351,13 @@ mark { background: var(--y); color: #000; padding: 0 0.18em; }
   .head .h2 { grid-column: 1 / -1; }
   .head__p { grid-column: 1 / -1; }
 }
+@media (max-width: 1000px) and (min-width: 761px) {
+  .stats { grid-template-columns: repeat(6, 1fr); }
+  .stat { grid-column: span 2; }
+  .stat:nth-child(n + 4) { grid-column: span 3; }
+  .stat:nth-child(3) { box-shadow: none; }
+  .stat:nth-child(-n + 3) { border-bottom: 1px solid var(--line); }
+}
 
 /* ---------- phone ---------- */
 @media (max-width: 760px) {
@@ -363,11 +381,17 @@ mark { background: var(--y); color: #000; padding: 0 0.18em; }
   .rail__num { font-size: 40px; }
   .rail__bar { height: 14svh; }
 
-  .casa { grid-template-columns: 1fr; }
-  .casa__mark { width: min(80vw, 380px); justify-self: center; grid-row: 1; }
+  /* on a phone the façade comes first, full width, and fades into the text below it */
+  .casa { display: block; min-height: 0; padding-top: 0; }
+  .casa__bg { position: relative; inset: auto; z-index: 0; height: min(78vw, 360px); margin: 0 calc(var(--pad) * -1) -12vw; }
+  .casa__bg img { object-position: 80% 50%; }
+  .casa__bg::after { background: linear-gradient(180deg, var(--bg) 0%, rgba(5, 5, 5, 0) 18%, rgba(5, 5, 5, 0) 55%, var(--bg) 100%); } /* taste-skill-ignore: picture melts into the page */
+  .casa__text { position: relative; z-index: 1; max-width: none; }
+  .casa__p { font-size: 18px; }
   .stats { grid-template-columns: repeat(2, 1fr); }
-  .stat:nth-child(2) { box-shadow: none; }
-  .stat:nth-child(-n + 2) { border-bottom: 1px solid var(--line); }
+  .stat { box-shadow: none; border-bottom: 1px solid var(--line); }
+  .stat:nth-child(odd):not(:last-child) { box-shadow: 1px 0 0 var(--line); }
+  .stat:last-child { grid-column: 1 / -1; border-bottom: 0; }
   .cards { grid-template-columns: 1fr; }
   .exp__grid { grid-template-columns: 1fr; }
   .themes { grid-template-columns: 1fr; }

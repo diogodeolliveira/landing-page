@@ -1,5 +1,5 @@
 // Pizzaria das Famílias · interações da página
-import { createStage, clamp, span, lerp, easeInOut } from './pizza3d.js?v=5.1';
+import { createStage, clamp, span, lerp, easeInOut } from './pizza3d.js?v=5.6';
 
 const CONFIG = {
   // WhatsApp para reservas, só dígitos, com 55 e DDD (ex.: '5541999999999').
