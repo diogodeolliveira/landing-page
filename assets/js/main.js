@@ -2,9 +2,9 @@
 import { createHeroVideo, clamp, span, STEPS, FINAL } from './hero-video.js?v=9.0';
 
 const CONFIG = {
-  // WhatsApp para reservas, só dígitos, com 55 e DDD (ex.: '5541999999999').
+  // WhatsApp para reservas, só dígitos, com 55 e DDD: (41) 3669-6782.
   // Vazio: o pedido de reserva abre o Instagram e a mensagem é copiada.
-  whatsapp: '',
+  whatsapp: '554136696782',
   instagram: 'https://www.instagram.com/pizzariadasfamilias_/',
 };
 

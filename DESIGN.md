@@ -1,4 +1,4 @@
-# Pizzaria das Famílias · DESIGN.md (versão 3.5, 22/10/2026: topo com o vídeo da montagem)
+# Pizzaria das Famílias · DESIGN.md (versão 3.6, 22/10/2026: WhatsApp e botões de contato)
 
 Site em `site/`, refeito do zero a partir dos três vídeos de referência (zip `drive-download…`):
 - **ÉCLAT**: escuro, a pizza montada pela rolagem (farinha, massa, molho, cobertura, forno), letreiro de ingredientes, faíscas flutuando, cardápio em cartões.
@@ -12,7 +12,7 @@ Site em `site/`, refeito do zero a partir dos três vídeos de referência (zip 
    - O vídeo foi recodificado sem áudio, com quadro-chave a cada 4 quadros, para avançar e voltar sem travar: `site/assets/video/montagem-720.mp4` (1280 × 720, 3,8 MB, computador) e `montagem-480.mp4` (854 × 480, 2 MB, celular), com a primeira imagem como pôster (`montagem-poster.webp`). O arquivo é baixado inteiro antes de entrar; até lá aparece o pôster. O original fica guardado na pasta e não é publicado.
    - Com "reduzir movimento", o vídeo não toca sozinho: a rolagem escolhe o quadro.
    Os botões "Reservar mesa" e "Ver o buffet" ficam fixos o tempo todo. As camadas recortadas da foto (versões 6 e 7) saíram do site.
-2. Letreiro, **A casa** (frase + logo aceso), **números** acesos (7 dias, 4h, pizzas, porções e comida japonesa à vontade, com um ∞ em neon e as 4 categorias de pizza na legenda; 10 convidados **pagantes** e o aniversariante não paga). A seção A casa tem ao fundo a foto da fachada à noite (`site/assets/img/fachada-noite.webp`), com o texto sobre o céu escuro à esquerda.
+2. Letreiro, **A casa** (frase + logo aceso), **números** acesos (7 dias, 4h, pizzas, porções e comida japonesa à vontade, com um ∞ em neon e as 4 categorias de pizza na legenda; 10 convidados **pagantes** e o aniversariante não paga). A seção A casa tem ao fundo a foto da fachada à noite (`site/assets/img/fachada-noite.webp`), com o texto sobre o céu escuro à esquerda. Abaixo do texto, dois botões: "Nos conheça melhor" (abre o Instagram @pizzariadasfamilias_) e "Fale conosco" (abre o WhatsApp (41) 3669-6782 com um "Olá! Vim pelo site" pronto).
 3. **O balcão**: 4 cartões com desenhos em linha amarela que se desenham ao entrar na tela.
 4. **Experiências**: espaço kids e aniversário.
 5. **Espaço kids monitorado** (no lugar das avaliações do Google, a pedido): foto do espaço kids (`site/assets/img/espaco-kids.webp`) com as cantoneiras amarelas, e três pontos: monitorado, incluso no buffet, 0 a 4 anos não pagam e 5 a 8 pagam meia. No menu, "Avaliações" virou "Espaço kids".
@@ -32,8 +32,11 @@ As imagens usadas são as enviadas na conversa (fachada à noite, espaço kids) 
 ## Movimento
 Curvas `cubic-bezier(0.23, 1, 0.32, 1)` e `(0.77, 0, 0.175, 1)`. Com "reduzir movimento" ligado no sistema, a pizza continua sendo montada pela rolagem (é você quem controla, sem suavização), mas param as faíscas, o letreiro, o vapor, a farinha no ar, o tranco da câmera e os movimentos automáticos. Para ver tudo nesse caso: `?movimento=completo`. No rodapé há um botão "Pausar animações".
 
+## Contato
+- WhatsApp (41) 3669-6782 (`CONFIG.whatsapp` = `554136696782` em `site/assets/js/main.js`): o pedido de reserva abre o WhatsApp com a mensagem pronta. O mesmo número aparece em "Fale conosco", no rodapé e na linha "Em casa" do Bom saber.
+- Instagram @pizzariadasfamilias_: botão "Nos conheça melhor" e rodapé.
+
 ## A confirmar com a pizzaria
-- Número do WhatsApp (`CONFIG.whatsapp` em `site/assets/js/main.js`). Sem ele, a reserva abre o Instagram e copia a mensagem.
 - Endereço e telefone vieram do perfil do Google: Rua Maria Antonieta dos Santos, 300, Maria Antonieta, Pinhais, PR, 83331-000 · (41) 3669-6782. Falta só o link de delivery, se houver.
 - Itens citados nos cartões a partir das fotos antigas (picanha, salmão, presunto e queijo, pizza de morango). Sobremesa: fondue de frutas.
 - Regra do aniversário: considerei o aniversariante adulto e as crianças de meia como pagantes.
