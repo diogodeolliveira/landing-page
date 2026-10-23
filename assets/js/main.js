@@ -1,5 +1,5 @@
 // Pizzaria das Famílias · interações da página
-import { createHeroVideo, clamp, span, STEPS, FINAL } from './hero-video.js?v=9.4';
+import { createHeroVideo, clamp, span, STEPS, FINAL } from './hero-video.js?v=9.5';
 
 const CONFIG = {
   // WhatsApp para reservas, só dígitos, com 55 e DDD: (41) 3669-6782.
@@ -71,7 +71,7 @@ if (embers && !reduce) {
 const hero = document.querySelector('[data-hero]');
 const playMQ = window.matchMedia('(max-width: 760px)');
 const playing = () => playMQ.matches; // a phone: one screen, the film plays by itself, no long scroll
-const heroFilm = hero && createHeroVideo(hero.querySelector('.hero__stage'), { small: phone(), play: playing(), reduce });
+const heroFilm = hero && createHeroVideo(hero.querySelector('.hero__stage'), { small: phone(), play: playing() });
 
 let heroP = 0, heroS = 0;
 const heroUI = hero && {
@@ -246,7 +246,7 @@ if (booking) {
 
 const pauseBtn = document.querySelector('[data-pause]');
 if (pauseBtn) {
-  if (reduce) pauseBtn.hidden = true;
+  if (reduce && !playing()) pauseBtn.hidden = true; // on a phone the film loops even then, so the button stays
   pauseBtn.addEventListener('click', () => {
     paused = !paused;
     root.classList.toggle('paused', paused);

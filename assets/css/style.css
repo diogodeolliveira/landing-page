@@ -128,8 +128,6 @@ main, footer { position: relative; z-index: 1; }
 /* on a phone the top is one screen and the film just plays (no long scroll through the steps) */
 .js .hero.hero--play { height: 100svh; }
 .hero--play .steps, .hero--play .hero__final, .hero--play .rail, .hero--play .hero__scroll { display: none; }
-.hero__play { display: none; }
-.hero--still .hero__play { display: inline-flex; position: absolute; z-index: 5; left: 50%; top: calc(var(--nav-h) + 1svh + 100vw * 11 / 16 - 66px); translate: -50% 0; white-space: nowrap; background: rgba(5, 5, 5, 0.62); }
 .hero__oven { position: absolute; inset: 0; z-index: 0; opacity: 0; background: radial-gradient(60% 55% at 62% 52%, rgba(255, 118, 24, 0.5), rgba(255, 70, 0, 0.12) 45%, transparent 70%); }
 .hero__intro { position: absolute; left: var(--pad); bottom: var(--above-dock); z-index: 4; width: min(48vw, 680px); }
 .hero__title { margin-top: 18px; font: 900 clamp(64px, 9.2vw, 156px)/0.84 var(--f-display); text-transform: uppercase; }

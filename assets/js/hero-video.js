@@ -1,8 +1,8 @@
 // Pizzaria das Famílias · o topo em vídeo: a pizza montada da bola de massa até sair do forno.
 // No computador o filme é conduzido pela rolagem: cada etapa da legenda ganha o seu trecho e os
 // cortes passam numa faixa curta (quadro-chave a cada 4 quadros, arquivo baixado inteiro, para
-// avançar e voltar sem travar). No celular o topo ocupa uma tela só e o filme toca sozinho, em
-// loop, sem prender a rolagem; com "reduzir movimento" fica a pizza pronta e um botão para assistir.
+// avançar e voltar sem travar). No celular o topo ocupa uma tela só e o filme começa sozinho e fica
+// em loop enquanto a pessoa estiver no site, sem prender a rolagem.
 
 export const clamp = (v, a = 0, b = 1) => Math.min(Math.max(v, a), b);
 export const span = (p, a, b) => clamp((p - a) / (b - a));
@@ -24,13 +24,12 @@ function frameAt(p) {
   return LAST;
 }
 
-export function createHeroVideo(root, { small = false, play = false, reduce = false } = {}) {
+export function createHeroVideo(root, { small = false, play = false } = {}) {
   const hero = root.closest('[data-hero]');
   const video = root.querySelector('[data-hero-video]');
-  const playBtn = root.querySelector('[data-hero-play]');
   const src = small ? 'assets/video/montagem-480.mp4' : 'assets/video/montagem-720.mp4';
   let mode = play ? 'play' : 'scroll';
-  let want = 0, ready = false, busy = false, onScreen = true, held = false, watched = false;
+  let want = 0, ready = false, busy = false, held = false;
 
   // ---- scroll mode: seek to the frame the scroll asks for, one seek at a time ----
   function seek() {
@@ -42,15 +41,22 @@ export function createHeroVideo(root, { small = false, play = false, reduce = fa
   video.addEventListener('seeked', () => { busy = false; seek(); });
   video.addEventListener('pause', seek);
 
-  // ---- play mode: the film runs by itself while the top of the page is on screen ----
-  const still = () => reduce && !watched;
+  // ---- play mode: the film starts by itself and loops for as long as the visitor is on the site ----
   function run() {
-    if (mode !== 'play' || still()) return;
-    if (onScreen && !held) { const p = video.play(); if (p) p.catch(() => {}); } else video.pause();
+    if (mode !== 'play') return;
+    if (held) { video.pause(); return; }
+    if (!video.paused) return;
+    const p = video.play();
+    if (p) p.catch(waitForTouch);
   }
-  if ('IntersectionObserver' in window) new IntersectionObserver(([e]) => { onScreen = e.isIntersecting; run(); }).observe(root);
-  // with reduced motion nothing starts on its own: the finished pizza, and a button to watch it being made
-  playBtn?.addEventListener('click', () => { watched = true; video.loop = false; hero.classList.remove('hero--still'); video.currentTime = 0; run(); });
+  // some phones refuse to start a video on their own (battery saver, data saver): the first touch starts it
+  function waitForTouch() {
+    const go = () => { ['touchend', 'pointerup', 'click', 'keydown'].forEach((t) => removeEventListener(t, go, true)); run(); };
+    ['touchend', 'pointerup', 'click', 'keydown'].forEach((t) => addEventListener(t, go, { capture: true, passive: true }));
+  }
+  // back from another app or tab, or a paused stream: carry on
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) run(); });
+  video.addEventListener('pause', () => { if (mode === 'play' && !held && !document.hidden && !video.ended) run(); });
 
   video.addEventListener('loadeddata', () => {
     ready = true;
@@ -60,17 +66,14 @@ export function createHeroVideo(root, { small = false, play = false, reduce = fa
 
   function setMode(m) {
     mode = m;
-    video.loop = m === 'play' && !reduce;
-    hero.classList.toggle('hero--still', m === 'play' && still());
-    if (m === 'play') {
-      if (still()) { video.poster = 'assets/video/montagem-pronta.webp'; hero.classList.add('is-film'); }
-      run();
-    } else { video.pause(); seek(); }
+    video.loop = video.autoplay = m === 'play';
+    if (m === 'play') run();
+    else { video.pause(); seek(); }
   }
 
   if (mode === 'play') {
     // a phone: stream it and let it play (no need to hold the whole file for seeking)
-    video.preload = reduce ? 'metadata' : 'auto';
+    video.preload = 'auto';
     video.src = src;
   } else {
     // phones only hand over frames once a muted video has played: start it and stop it at once
