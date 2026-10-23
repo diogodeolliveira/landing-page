@@ -1,7 +1,8 @@
-// Pizzaria das Famílias · o topo em vídeo: a pizza montada da bola de massa até sair do forno,
-// conduzida pela rolagem. Cada etapa da legenda ganha o seu trecho de rolagem e os cortes do filme
-// passam numa faixa curta. O vídeo foi codificado com quadro-chave a cada 4 quadros e é baixado
-// inteiro antes de entrar, para avançar e voltar quadro a quadro sem travar.
+// Pizzaria das Famílias · o topo em vídeo: a pizza montada da bola de massa até sair do forno.
+// No computador o filme é conduzido pela rolagem: cada etapa da legenda ganha o seu trecho e os
+// cortes passam numa faixa curta (quadro-chave a cada 4 quadros, arquivo baixado inteiro, para
+// avançar e voltar sem travar). No celular o topo ocupa uma tela só e o filme toca sozinho, em
+// loop, sem prender a rolagem; com "reduzir movimento" fica a pizza pronta e um botão para assistir.
 
 export const clamp = (v, a = 0, b = 1) => Math.min(Math.max(v, a), b);
 export const span = (p, a, b) => clamp((p - a) / (b - a));
@@ -23,33 +24,69 @@ function frameAt(p) {
   return LAST;
 }
 
-export function createHeroVideo(root, { small = false } = {}) {
+export function createHeroVideo(root, { small = false, play = false, reduce = false } = {}) {
   const hero = root.closest('[data-hero]');
   const video = root.querySelector('[data-hero-video]');
+  const playBtn = root.querySelector('[data-hero-play]');
   const src = small ? 'assets/video/montagem-480.mp4' : 'assets/video/montagem-720.mp4';
-  let want = 0, ready = false, busy = false;
+  let mode = play ? 'play' : 'scroll';
+  let want = 0, ready = false, busy = false, onScreen = true, held = false, watched = false;
 
+  // ---- scroll mode: seek to the frame the scroll asks for, one seek at a time ----
   function seek() {
-    if (!ready || busy) return;
+    if (mode !== 'scroll' || !ready || busy) return;
     if (Math.abs(video.currentTime - want) < 0.3 / FPS) return;
     busy = true;
     video.currentTime = want;
   }
   video.addEventListener('seeked', () => { busy = false; seek(); });
   video.addEventListener('pause', seek);
+
+  // ---- play mode: the film runs by itself while the top of the page is on screen ----
+  const still = () => reduce && !watched;
+  function run() {
+    if (mode !== 'play' || still()) return;
+    if (onScreen && !held) { const p = video.play(); if (p) p.catch(() => {}); } else video.pause();
+  }
+  if ('IntersectionObserver' in window) new IntersectionObserver(([e]) => { onScreen = e.isIntersecting; run(); }).observe(root);
+  // with reduced motion nothing starts on its own: the finished pizza, and a button to watch it being made
+  playBtn?.addEventListener('click', () => { watched = true; video.loop = false; hero.classList.remove('hero--still'); video.currentTime = 0; run(); });
+
   video.addEventListener('loadeddata', () => {
     ready = true;
     hero.classList.add('is-film');
-    seek();
+    if (mode === 'scroll') seek(); else run();
   }, { once: true });
-  // phones only hand over frames once a muted video has played: start it and stop it at once
-  video.addEventListener('loadedmetadata', () => { const p = video.play(); if (p) p.then(() => video.pause()).catch(() => {}); }, { once: true });
-  // the whole file first, so every frame is at hand when scrolling back and forth (no range requests)
-  fetch(src).then((r) => (r.ok ? r.blob() : Promise.reject(r.status))).then((b) => { video.src = URL.createObjectURL(b); }).catch(() => { video.src = src; });
 
-  function update(p) {
-    want = Math.min(frameAt(p) + 0.5, LAST + 0.5) / FPS; // the middle of the frame, never its edge
-    seek();
+  function setMode(m) {
+    mode = m;
+    video.loop = m === 'play' && !reduce;
+    hero.classList.toggle('hero--still', m === 'play' && still());
+    if (m === 'play') {
+      if (still()) { video.poster = 'assets/video/montagem-pronta.webp'; hero.classList.add('is-film'); }
+      run();
+    } else { video.pause(); seek(); }
   }
-  return { update, resize() {} };
+
+  if (mode === 'play') {
+    // a phone: stream it and let it play (no need to hold the whole file for seeking)
+    video.preload = reduce ? 'metadata' : 'auto';
+    video.src = src;
+  } else {
+    // phones only hand over frames once a muted video has played: start it and stop it at once
+    video.addEventListener('loadedmetadata', () => { if (mode !== 'scroll') return; const p = video.play(); if (p) p.then(() => video.pause()).catch(() => {}); }, { once: true });
+    // the whole file first, so every frame is at hand when scrolling back and forth (no range requests)
+    fetch(src).then((r) => (r.ok ? r.blob() : Promise.reject(r.status))).then((b) => { video.src = URL.createObjectURL(b); }).catch(() => { video.src = src; });
+  }
+  setMode(mode);
+
+  return {
+    update(p) {
+      want = Math.min(frameAt(p) + 0.5, LAST + 0.5) / FPS; // the middle of the frame, never its edge
+      seek();
+    },
+    setMode,
+    hold(on) { held = on; run(); }, // the footer's "pause animations"
+    resize() {},
+  };
 }

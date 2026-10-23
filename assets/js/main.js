@@ -1,5 +1,5 @@
 // Pizzaria das Famílias · interações da página
-import { createHeroVideo, clamp, span, STEPS, FINAL } from './hero-video.js?v=9.0';
+import { createHeroVideo, clamp, span, STEPS, FINAL } from './hero-video.js?v=9.4';
 
 const CONFIG = {
   // WhatsApp para reservas, só dígitos, com 55 e DDD: (41) 3669-6782.
@@ -67,9 +67,11 @@ if (embers && !reduce) {
   requestAnimationFrame(loop);
 }
 
-// ---------- the hero: the film of the pizza being made, run by the scroll ----------
+// ---------- the hero: the film of the pizza being made, run by the scroll (on a phone it just plays) ----------
 const hero = document.querySelector('[data-hero]');
-const heroFilm = hero && createHeroVideo(hero.querySelector('.hero__stage'), { small: phone() });
+const playMQ = window.matchMedia('(max-width: 760px)');
+const playing = () => playMQ.matches; // a phone: one screen, the film plays by itself, no long scroll
+const heroFilm = hero && createHeroVideo(hero.querySelector('.hero__stage'), { small: phone(), play: playing(), reduce });
 
 let heroP = 0, heroS = 0;
 const heroUI = hero && {
@@ -112,7 +114,7 @@ addEventListener('resize', resizeAll);
 const nav = document.querySelector('[data-nav]');
 let needsHero = true;
 function onScroll() {
-  if (hero) {
+  if (hero && !playing()) {
     const r = hero.getBoundingClientRect();
     heroP = clamp(-r.top / (r.height - innerHeight));
     needsHero = true;
@@ -120,8 +122,19 @@ function onScroll() {
   nav.classList.toggle('is-solid', scrollY > 40);
 }
 addEventListener('scroll', onScroll, { passive: true });
-onScroll();
-heroS = heroP;
+// the two tops: scroll-run film with the steps (computer), or one screen with the film playing (phone)
+function applyHeroMode() {
+  if (!hero) return;
+  const play = playing();
+  hero.classList.toggle('hero--play', play);
+  heroFilm.setMode(play ? 'play' : 'scroll');
+  if (play) { show(heroUI.intro, 1, 0); heroUI.oven.style.opacity = '0'; }
+  onScroll();
+  heroS = heroP;
+  needsHero = true;
+}
+playMQ.addEventListener('change', applyHeroMode);
+applyHeroMode();
 resizeAll();
 
 const t0 = performance.now();
@@ -129,14 +142,14 @@ let lastNow = t0;
 function frame(now) {
   const time = (now - t0) / 1000, dt = Math.min(0.1, (now - lastNow) / 1000);
   lastNow = now;
-  if (hero) {
+  if (hero && !playing()) {
     // with motion on, the story eases after the scroll (a fast flick still plays every beat)
     const prev = heroS;
     heroS = still() ? heroP : heroS + (heroP - heroS) * (1 - Math.exp(-dt * 4.2));
     if (Math.abs(heroP - heroS) < 0.00005) heroS = heroP;
     if (heroS !== prev) needsHero = true;
   }
-  if (hero && (visibleSet.has(hero) || !visIO) && (needsHero || !still())) { updateHero(time); needsHero = false; }
+  if (hero && !playing() && (visibleSet.has(hero) || !visIO) && (needsHero || !still())) { updateHero(time); needsHero = false; }
   requestAnimationFrame(frame);
 }
 requestAnimationFrame(frame);
@@ -239,6 +252,7 @@ if (pauseBtn) {
     root.classList.toggle('paused', paused);
     pauseBtn.setAttribute('aria-pressed', String(paused));
     pauseBtn.textContent = paused ? 'Retomar animações' : 'Pausar animações';
+    heroFilm?.hold(paused);
     needsHero = true;
   });
 }

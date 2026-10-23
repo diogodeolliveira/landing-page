@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600;700&family=Big+Shoulders+Display:wght@500;700;800;900&family=Big+Shoulders+Inline+Display:wght@700;800&family=Cormorant+Garamond:ital,wght@1,500;1,600&display=swap">
   <link rel="preload" as="image" href="assets/video/montagem-poster.webp">
-  <link rel="stylesheet" href="assets/css/style.css?v=9.2">
+  <link rel="stylesheet" href="assets/css/style.css?v=9.4">
   <script>
     document.documentElement.classList.add('js');
     if (/[?&]movimento=completo/.test(location.search)) document.documentElement.classList.add('force-motion');
@@ -26,7 +26,7 @@
   <header class="nav" data-nav>
     <a class="nav__brand" href="#topo" aria-label="Pizzaria das Famílias, início"><img src="assets/img/logo.webp" width="554" height="500" alt="Pizzaria das Famílias"></a>
     <nav class="nav__links" aria-label="Seções">
-      <a href="#balcao">O balcão</a>
+      <a href="#balcao">Cardápio</a>
       <a href="#experiencias">Experiências</a>
       <a href="#espaco-kids">Espaço kids</a>
       <a href="#bom-saber">Bom saber</a>
@@ -42,6 +42,7 @@
         <div class="hero__media" aria-hidden="true">
           <video class="hero__video" data-hero-video muted playsinline preload="auto" disablepictureinpicture disableremoteplayback tabindex="-1"></video>
         </div>
+        <button class="btn btn--sm btn--ghost hero__play" type="button" data-hero-play><svg viewBox="0 0 24 24" aria-hidden="true"><path class="dot" d="M8 5.5v13l10.5-6.5z"/></svg>Ver a pizza sendo montada</button>
         <div class="hero__oven" data-oven aria-hidden="true"></div>
         <div class="hud" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 
@@ -117,10 +118,10 @@
       <div class="stat" data-reveal><p class="label">// 04</p><p class="stat__n"><span data-count="10">10</span></p><p class="stat__t">Convidados <mark>pagantes</mark></p><p class="stat__p">e o aniversariante não paga.</p></div>
     </section>
 
-    <!-- 5. O balcão -->
+    <!-- 5. Nosso cardápio livre -->
     <section class="balcao" id="balcao" aria-labelledby="balcao-title">
       <div class="head">
-        <p class="label" data-reveal>// O balcão</p>
+        <p class="label" data-reveal>// Nosso cardápio livre</p>
         <h2 class="h2" id="balcao-title" data-reveal>Tudo à <span class="y">vontade.</span></h2>
         <p class="head__p" data-reveal>Pizza, porção, japonês e sobremesa no mesmo buffet, pelo mesmo preço. A disponibilidade dos itens pode variar durante a noite.</p>
       </div>
@@ -136,7 +137,7 @@
           </div>
           <p class="label">// 01</p>
           <h3 class="card__t">Pizzas salgadas</h3>
-          <p class="card__p">Tradicionais, especiais e nobres, como picanha, salmão e presunto e queijo.</p>
+          <p class="card__p">Mais de 50 sabores de pizzas entre tradicionais, especiais e nobres são disponibilizados ao longo da noite.</p>
         </article>
         <article class="card" data-tilt data-reveal>
           <div class="card__art">
@@ -150,7 +151,7 @@
           </div>
           <p class="label">// 02</p>
           <h3 class="card__t">Doces e fondue</h3>
-          <p class="card__p">A quarta categoria do rodízio: pizzas doces, como a de morango. E de sobremesa, fondue de frutas.</p>
+          <p class="card__p">Pizzas doces de diversos sabores e fondue de frutas sortidas.</p>
         </article>
         <article class="card" data-tilt data-reveal>
           <div class="card__art">
@@ -307,6 +308,6 @@
     </div>
   </footer>
 
-  <script type="module" src="assets/js/main.js?v=9.1"></script>
+  <script type="module" src="assets/js/main.js?v=9.4"></script>
 </body>
 </html>
