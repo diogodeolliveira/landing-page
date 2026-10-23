@@ -1,5 +1,5 @@
 // Pizzaria das Famílias · interações da página
-import { createStage, clamp, span, lerp, easeInOut } from './pizza3d.js?v=5.6';
+import { createHeroVideo, clamp, span, STEPS, FINAL } from './hero-video.js?v=9.0';
 
 const CONFIG = {
   // WhatsApp para reservas, só dígitos, com 55 e DDD (ex.: '5541999999999').
@@ -67,45 +67,11 @@ if (embers && !reduce) {
   requestAnimationFrame(loop);
 }
 
-// ---------- the hero: the pizza is born on the bench as you scroll ----------
+// ---------- the hero: the film of the pizza being made, run by the scroll ----------
 const hero = document.querySelector('[data-hero]');
-const heroStage = hero && createStage(hero.querySelector('[data-hero-canvas]'), { quality: phone() ? 0.6 : 1 });
-if (hero && !heroStage) root.classList.add('no-webgl');
-if (/[?&]debug\b/.test(location.search)) window.__hero = heroStage; // inspection only
+const heroFilm = hero && createHeroVideo(hero.querySelector('.hero__stage'), { small: phone() });
 
-// the story, in scroll progress: the dough lands at IMPACT
-const IMPACT = 0.105;
-const PH = {
-  drop: [0.035, IMPACT], impact: [IMPACT, 0.235], flat: [0.15, 0.25],
-  sauce: [0.25, 0.45], cheese: [0.45, 0.585],
-  calabresa: [0.585, 0.665], onion: [0.64, 0.7], olive: [0.665, 0.72],
-  oregano: [0.72, 0.765], bake: [0.75, 0.815], basil: [0.8, 0.87],
-};
-const STEPS = [[0.035, 0.25], [0.25, 0.45], [0.45, 0.585], [0.585, 0.72], [0.72, 0.88]];
-const FINAL = 0.9;
-const CAM = [ // p, radius, elevation, azimuth, lookY
-  [0.0, 7.2, 0.4, -0.55, 0.55],
-  [0.04, 7.0, 0.38, -0.5, 0.75],
-  [IMPACT, 6.3, 0.33, -0.42, 0.24],
-  [0.16, 6.8, 0.42, -0.36, 0.2],
-  [0.25, 7.5, 0.78, -0.16, 0.24],
-  [0.42, 7.4, 0.86, 0.04, 0.12],
-  [0.47, 7.6, 0.98, 0.1, 0.1],
-  [0.6, 7.6, 1.08, 0.2, 0.08],
-  [0.72, 7.2, 0.96, 0.3, 0.1],
-  [0.82, 6.6, 0.74, 0.45, 0.12],
-  [0.93, 5.6, 0.5, 0.7, 0.14],
-  [1.0, 5.7, 0.52, 0.78, 0.14],
-];
-function camAt(p) {
-  for (let i = 0; i < CAM.length - 1; i++) {
-    const [a, ...ka] = CAM[i], [b, ...kb] = CAM[i + 1];
-    if (p <= b) { const t = easeInOut(span(p, a, b)); return ka.map((v, k) => lerp(v, kb[k], t)); }
-  }
-  return CAM[CAM.length - 1].slice(1);
-}
-
-let heroP = 0, heroS = 0, shakeT0 = -1;
+let heroP = 0, heroS = 0;
 const heroUI = hero && {
   intro: hero.querySelector('[data-intro]'),
   cue: hero.querySelector('[data-scrollcue]'),
@@ -129,56 +95,18 @@ function updateHero(time) {
   show(u.final, span(p, FINAL, FINAL + 0.03));
   const step = STEPS.findIndex(([a, b]) => p >= a && p < b);
   u.num.textContent = p >= FINAL ? '06' : step < 0 ? '00' : `0${step + 1}`;
-  u.fill.style.height = `${clamp(span(p, PH.drop[0], FINAL)) * 100}%`;
-  const ovenOn = span(p, 0.75, 0.78) * (1 - span(p, 0.81, 0.87));
-  u.oven.style.opacity = String(ovenOn);
-
-  if (!heroStage) return;
-  const s = heroStage;
-  const ph = (k) => span(p, PH[k][0], PH[k][1]);
-  s.pizza.apply({
-    sift: 1 - span(p, 0.03, 0.07),
-    motes: clamp(lerp(1, 0.3, span(p, 0.12, 0.24)) + 0.4 * span(p, 0.86, 0.95)),
-    drop: ph('drop'), impact: ph('impact'), flat: ph('flat'),
-    dust: 1 - span(p, 0.3, 0.44),
-    sauce: ph('sauce'), cheese: ph('cheese'),
-    calabresa: ph('calabresa'), onion: ph('onion'), olive: ph('olive'),
-    oregano: ph('oregano'), bake: ph('bake'), basil: ph('basil'),
-    steam: still() ? 0 : span(p, 0.79, 0.86),
-  }, still() ? 0 : time); // with motion off, nothing drifts on its own
-  s.oven.intensity = 28 * ovenOn;
-
-  let [radius, elev, az, lookY] = camAt(p);
-  // the camera follows the dough down, then settles on the bench
-  const dy = s.pizza.info.doughY;
-  if (dy > 0 && p < IMPACT + 0.03) lookY = lerp(lookY, clamp(0.22 + dy * 0.34, 0.22, 1.3), 1 - span(p, IMPACT, IMPACT + 0.03));
-  const live = still() ? 0 : 1;
-  // narrower screens step back so the whole pizza stays in the frame
-  const fit = phone() ? 1.7 : Math.pow(clamp(1.6 / (innerWidth / innerHeight), 1, 1.8), 0.85);
-  Object.assign(s.view, {
-    radius: radius * fit,
-    elev: elev + live * Math.sin(time * 0.18) * 0.012,
-    az: az + live * Math.sin(time * 0.25) * 0.03,
-    lookY,
-    offsetX: phone() ? 0 : 0.2,
-    offsetY: phone() ? 0.2 : 0,
-  });
-  // a short jolt when the dough hits the bench
-  const k = time - shakeT0, jolt = live && shakeT0 >= 0 && k < 1.2 ? Math.exp(-k * 6.5) : 0;
-  s.view.shakeX = Math.sin(k * 61) * 0.05 * jolt;
-  s.view.shakeY = Math.cos(k * 53) * 0.04 * jolt;
-  s.view.fov = 30 - 1.4 * jolt * clamp(k * 30);
-  s.key.intensity = 180 * (1 + live * Math.sin(time * 0.6) * 0.035 * span(p, 0.86, 0.95));
-  s.render();
+  u.fill.style.height = `${clamp(span(p, STEPS[0][0], FINAL)) * 100}%`;
+  // a warm flash from the oven over the film's cut to the finished pizza
+  u.oven.style.opacity = String(span(p, 0.79, 0.825) * (1 - span(p, 0.83, 0.88)));
+  heroFilm.update(p);
 }
 
-// ---------- one loop for the 3D view ----------
+// ---------- one loop for the hero ----------
 const visibleSet = new Set();
 const visIO = 'IntersectionObserver' in window && new IntersectionObserver((es) => es.forEach((e) => (e.isIntersecting ? visibleSet.add(e.target) : visibleSet.delete(e.target))), { rootMargin: '200px' });
 if (hero && visIO) visIO.observe(hero);
 
-function resizeAll() { heroStage?.resize(); }
-resizeAll();
+function resizeAll() { heroFilm?.resize(); needsHero = true; }
 addEventListener('resize', resizeAll);
 
 const nav = document.querySelector('[data-nav]');
@@ -194,6 +122,7 @@ function onScroll() {
 addEventListener('scroll', onScroll, { passive: true });
 onScroll();
 heroS = heroP;
+resizeAll();
 
 const t0 = performance.now();
 let lastNow = t0;
@@ -203,9 +132,8 @@ function frame(now) {
   if (hero) {
     // with motion on, the story eases after the scroll (a fast flick still plays every beat)
     const prev = heroS;
-    heroS = still() ? heroP : heroS + (heroP - heroS) * (1 - Math.exp(-dt * 6));
+    heroS = still() ? heroP : heroS + (heroP - heroS) * (1 - Math.exp(-dt * 4.2));
     if (Math.abs(heroP - heroS) < 0.00005) heroS = heroP;
-    if (!still() && prev < IMPACT && heroS >= IMPACT) shakeT0 = time;
     if (heroS !== prev) needsHero = true;
   }
   if (hero && (visibleSet.has(hero) || !visIO) && (needsHero || !still())) { updateHero(time); needsHero = false; }
@@ -245,6 +173,8 @@ if (booking) {
   const longFmt = new Intl.DateTimeFormat('pt-BR', { weekday: 'long', day: 'numeric', month: 'long' });
   const monFmt = new Intl.DateTimeFormat('pt-BR', { month: 'short' });
   const s = { date: null, hora: '', pessoas: 10, niver: false };
+  const termsBox = booking.querySelector('[data-terms]'), terms = termsBox.querySelector('input');
+  terms.addEventListener('change', () => { if (terms.checked) { termsBox.classList.remove('is-missing'); if (status.textContent.includes('termos')) status.textContent = ''; } });
   const d0 = new Date(); d0.setHours(0, 0, 0, 0);
   const start = new Date(d0); start.setDate(d0.getDate() - d0.getDay());
   for (let k = 0; k < 35; k++) {
@@ -287,10 +217,12 @@ if (booking) {
     e.preventDefault();
     const nome = booking.querySelector('[name="nome"]').value.trim();
     const miss = !s.date ? ['Escolha o dia da reserva no calendário.', cal.querySelector('.day:not(:disabled)')]
-      : !s.hora ? ['Escolha o horário de chegada: 19h, 19h30 ou 20h.', booking.querySelector('[name="hora"]')]
-      : !nome ? ['Escreva seu nome para a gente saber de quem é a reserva.', booking.querySelector('[name="nome"]')] : null;
+      : !s.hora ? ['Escolha o horário de chegada, entre 19h e 20h.', booking.querySelector('[name="hora"]')]
+      : !nome ? ['Escreva seu nome para a gente saber de quem é a reserva.', booking.querySelector('[name="nome"]')]
+      : !terms.checked ? ['Para enviar, marque que leu e concorda com os termos da reserva.', terms] : null;
+    termsBox.classList.toggle('is-missing', miss?.[1] === terms);
     if (miss) { status.textContent = miss[0]; miss[1].focus(); return; }
-    const text = `Olá! Sou ${nome} e gostaria de reservar o buffet livre para ${s.pessoas} pessoas, ${longFmt.format(s.date)}, chegando às ${s.hora}${s.niver ? '. É aniversário!' : '.'}`;
+    const text = `Olá! Sou ${nome} e gostaria de reservar o buffet livre para ${s.pessoas} pessoas, ${longFmt.format(s.date)}, chegando às ${s.hora}${s.niver ? '. É aniversário!' : '.'} Li e concordo com os termos da reserva.`;
     if (CONFIG.whatsapp) { window.open(reserveHref(text), '_blank', 'noopener'); status.textContent = 'Abrimos o WhatsApp com a sua mensagem pronta.'; return; }
     try { await navigator.clipboard.writeText(text); status.textContent = 'Mensagem copiada. Cole no direct do nosso Instagram.'; }
     catch { status.textContent = `Mande no direct do Instagram: “${text}”`; }

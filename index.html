@@ -12,8 +12,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600;700&family=Big+Shoulders+Display:wght@500;700;800;900&family=Big+Shoulders+Inline+Display:wght@700;800&family=Cormorant+Garamond:ital,wght@1,500;1,600&display=swap">
-  <link rel="modulepreload" href="assets/vendor/three.module.min.js">
-  <link rel="stylesheet" href="assets/css/style.css?v=5.6">
+  <link rel="preload" as="image" href="assets/video/montagem-poster.webp">
+  <link rel="stylesheet" href="assets/css/style.css?v=9.1">
   <script>
     document.documentElement.classList.add('js');
     if (/[?&]movimento=completo/.test(location.search)) document.documentElement.classList.add('force-motion');
@@ -28,7 +28,7 @@
     <nav class="nav__links" aria-label="Seções">
       <a href="#balcao">O balcão</a>
       <a href="#experiencias">Experiências</a>
-      <a href="#avaliacoes">Avaliações</a>
+      <a href="#espaco-kids">Espaço kids</a>
       <a href="#bom-saber">Bom saber</a>
       <a href="#visite">Visite</a>
     </nav>
@@ -36,10 +36,12 @@
   </header>
 
   <main>
-    <!-- 1. A pizza nasce na bancada enquanto você rola -->
+    <!-- 1. A pizza montada em vídeo, conduzida pela rolagem -->
     <section class="hero" id="topo" aria-labelledby="hero-title" data-hero>
       <div class="hero__stage">
-        <canvas class="hero__canvas" data-hero-canvas aria-hidden="true"></canvas>
+        <div class="hero__media" aria-hidden="true">
+          <video class="hero__video" data-hero-video muted playsinline preload="auto" disablepictureinpicture disableremoteplayback tabindex="-1"></video>
+        </div>
         <div class="hero__oven" data-oven aria-hidden="true"></div>
         <div class="hud" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 
@@ -63,7 +65,7 @@
           <li class="step" data-step="1"><p class="label">// 02</p><h2 class="step__t">O molho</h2><p class="step__p">Molho de tomate do centro até a borda.</p></li>
           <li class="step" data-step="2"><p class="label">// 03</p><h2 class="step__t">O queijo</h2><p class="step__p">Mussarela até a borda, para derreter no forno.</p></li>
           <li class="step" data-step="3"><p class="label">// 04</p><h2 class="step__t">A cobertura</h2><p class="step__p">Tradicionais, especiais, nobres e doces: as quatro categorias do cardápio entram no rodízio.</p></li>
-          <li class="step" data-step="4"><p class="label">// 05</p><h2 class="step__t">O forno</h2><p class="step__p">Queijo borbulhando, borda tostada, manjericão por cima. Saiu do forno, foi para o balcão.</p></li>
+          <li class="step" data-step="4"><p class="label">// 05</p><h2 class="step__t">O orégano</h2><p class="step__p">Orégano por cima e direto para o forno: queijo derretido, borda dourada.</p></li>
         </ol>
         <div class="hero__final" data-final>
           <p class="label">// 06</p>
@@ -107,9 +109,8 @@
     <section class="stats" aria-label="A casa em números">
       <div class="stat" data-reveal><p class="label">// 01</p><p class="stat__n"><span data-count="7">7</span></p><p class="stat__t">Dias por semana</p><p class="stat__p">Buffet livre todos os dias.</p></div>
       <div class="stat" data-reveal><p class="label">// 02</p><p class="stat__n"><span data-count="4">4</span>h</p><p class="stat__t">De buffet</p><p class="stat__p">Das 19h às 23h.</p></div>
-      <div class="stat" data-reveal><p class="label">// 03</p><p class="stat__n"><span data-count="4">4</span></p><p class="stat__t">Categorias de pizza</p><p class="stat__p">Tradicionais, especiais, nobres e doces.</p></div>
-      <div class="stat" data-reveal><p class="label">// 04</p><p class="stat__n stat__n--inf"><svg viewBox="0 0 124 62" role="img" aria-label="À vontade"><path d="M62 31C47 9 12 9 12 31s35 22 50 0 50-22 50 0-35 22-50 0z"/><path class="inline" d="M62 31C47 9 12 9 12 31s35 22 50 0 50-22 50 0-35 22-50 0z"/></svg></p><p class="stat__t">Porções e comida japonesa</p><p class="stat__p">À vontade, no mesmo buffet.</p></div>
-      <div class="stat" data-reveal><p class="label">// 05</p><p class="stat__n"><span data-count="10">10</span></p><p class="stat__t">Convidados <mark>pagantes</mark></p><p class="stat__p">e o aniversariante não paga.</p></div>
+      <div class="stat" data-reveal><p class="label">// 03</p><p class="stat__n stat__n--inf"><svg viewBox="0 0 124 62" role="img" aria-label="À vontade"><path d="M62 31C47 9 12 9 12 31s35 22 50 0 50-22 50 0-35 22-50 0z"/><path class="inline" d="M62 31C47 9 12 9 12 31s35 22 50 0 50-22 50 0-35 22-50 0z"/></svg></p><p class="stat__t">Pizzas, porções e comida japonesa</p><p class="stat__p">Tudo à vontade, com as quatro categorias de pizza: tradicionais, especiais, nobres e doces.</p></div>
+      <div class="stat" data-reveal><p class="label">// 04</p><p class="stat__n"><span data-count="10">10</span></p><p class="stat__t">Convidados <mark>pagantes</mark></p><p class="stat__p">e o aniversariante não paga.</p></div>
     </section>
 
     <!-- 5. O balcão -->
@@ -205,35 +206,22 @@
       </div>
     </section>
 
-    <!-- 7. Avaliações -->
-    <section class="reviews" id="avaliacoes" aria-labelledby="rev-title">
+    <!-- 7. Espaço kids -->
+    <section class="kids" id="espaco-kids" aria-labelledby="kids-title">
       <div class="head">
-        <p class="label" data-reveal>// Avaliações no Google</p>
-        <h2 class="h2" id="rev-title" data-reveal>O que dizem <span class="y">as famílias.</span></h2>
+        <p class="label" data-reveal>// Espaço kids</p>
+        <h2 class="h2" id="kids-title" data-reveal>Espaço kids <span class="y">monitorado.</span></h2>
+        <p class="head__p" data-reveal>Enquanto a família aproveita o buffet, as crianças brincam num espaço monitorado, que já vem incluso no valor do buffet livre.</p>
       </div>
-      <div class="reviews__grid">
-        <div class="score" data-reveal>
-          <p class="score__n">4,4</p>
-          <p class="stars" style="--r: 4.4" role="img" aria-label="Nota 4,4 de 5">★★★★★</p>
-          <p class="score__t"><b>734 avaliações</b> no Google</p>
-          <div class="score__cta">
-            <a class="btn" href="https://share.google/fUitSAdfr2cEgQslO" target="_blank" rel="noopener">Ver as avaliações</a>
-            <a class="btn btn--ghost" href="https://share.google/fUitSAdfr2cEgQslO" target="_blank" rel="noopener">Deixe a sua</a>
-          </div>
-        </div>
-        <figure class="quote" data-reveal>
-          <blockquote>“Já é minha pizzaria favorita da cidade!”</blockquote>
-          <figcaption><b>Renata Mello</b> · Local Guide · avaliação no Google</figcaption>
-        </figure>
-      </div>
-      <p class="label reviews__sub" data-reveal>// O que mais aparece nas avaliações</p>
-      <ul class="themes">
-        <li class="theme" data-reveal><span class="theme__n">01</span><h3 class="theme__t">Variedade no buffet</h3><p>Pizza, porções e comida japonesa no mesmo rodízio: o buffet é o assunto mais citado.</p></li>
-        <li class="theme" data-reveal><span class="theme__n">02</span><h3 class="theme__t">Espaço kids</h3><p>Lembrado em várias avaliações de quem vai com as crianças.</p></li>
-        <li class="theme" data-reveal><span class="theme__n">03</span><h3 class="theme__t">Pizzas doces</h3><p>Muita gente destaca as doces e as pizzas bem recheadas e quentinhas.</p></li>
-        <li class="theme" data-reveal><span class="theme__n">04</span><h3 class="theme__t">Aniversários</h3><p>Mesas reservadas com capricho e atendimento elogiado em quem foi comemorar.</p></li>
+      <figure class="kids__photo" data-reveal>
+        <img src="assets/img/espaco-kids.webp" width="1983" height="793" alt="Espaço kids da pizzaria, com piscina de bolinhas, escorregador e brinquedos protegidos por redes" loading="lazy" decoding="async">
+        <div class="hud hud--sm" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+      </figure>
+      <ul class="kids__facts">
+        <li data-reveal><p class="kids__k">Monitorado</p><p>Um espaço com monitoria, para os pais comerem com tranquilidade enquanto os pequenos brincam.</p></li>
+        <li data-reveal><p class="kids__k">Incluso no buffet</p><p>Brincar não custa nada a mais: o espaço kids já está no valor do buffet livre.</p></li>
+        <li data-reveal><p class="kids__k">0 a 4 anos não pagam</p><p>De 5 a 8 anos, meia. Em alguns casos podemos pedir documento.</p></li>
       </ul>
-      <p class="fine">Resumo das avaliações públicas da pizzaria no Google, em outubro de 2026.</p>
     </section>
 
     <!-- 8. Bom saber -->
@@ -272,16 +260,21 @@
             <legend class="label">// Horário de chegada</legend>
             <div class="slots">
               <label><input type="radio" name="hora" value="19h"><span>19h</span></label>
+              <label><input type="radio" name="hora" value="19h15"><span>19h15</span></label>
               <label><input type="radio" name="hora" value="19h30"><span>19h30</span></label>
+              <label><input type="radio" name="hora" value="19h45"><span>19h45</span></label>
               <label><input type="radio" name="hora" value="20h"><span>20h</span></label>
             </div>
           </fieldset>
           <div class="stepper" data-people><span id="l-pe">Pessoas</span><div class="stepper__c"><button type="button" data-pstep="-1" aria-label="Menos uma pessoa">−</button><output aria-labelledby="l-pe" aria-live="polite" data-people-val>10</output><button type="button" data-pstep="1" aria-label="Mais uma pessoa">+</button></div></div>
           <label class="vh" for="r-nome">Seu nome</label>
           <input class="field" id="r-nome" name="nome" type="text" autocomplete="name" placeholder="Seu nome">
-          <label class="switch"><input type="checkbox" name="niver"><span class="switch__ui" aria-hidden="true"></span><span>É aniversário</span></label>
+          <label class="switch"><input type="checkbox" name="niver" aria-describedby="r-niver-nota"><span class="switch__ui" aria-hidden="true"></span><span>É aniversário</span></label>
+          <p class="booking__note" id="r-niver-nota">O aniversariante só ganha o buffet acompanhado de 10 convidados pagantes.</p>
           <p class="booking__sum" data-booking-sum>Escolha o dia e o horário.</p>
+          <label class="check" data-terms><input type="checkbox" name="termos"><span class="check__ui" aria-hidden="true"></span><span>Li e concordo com os <a class="link" href="#bom-saber">termos da reserva</a> mencionados anteriormente.</span></label>
           <button class="btn btn--block" type="submit">Enviar pedido de reserva</button>
+          <p class="booking__note">Depois de enviar, aguarde a confirmação da sua reserva pelo nosso WhatsApp.</p>
           <p class="booking__status" data-booking-status role="status"></p>
         </div>
       </form>
@@ -310,6 +303,6 @@
     </div>
   </footer>
 
-  <script type="module" src="assets/js/main.js?v=5.6"></script>
+  <script type="module" src="assets/js/main.js?v=9.0"></script>
 </body>
 </html>

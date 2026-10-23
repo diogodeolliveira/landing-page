@@ -1,4 +1,4 @@
-# Pizzaria das Famílias · DESIGN.md (versão 3.2, 21/10/2026: novo topo)
+# Pizzaria das Famílias · DESIGN.md (versão 3.5, 22/10/2026: topo com o vídeo da montagem)
 
 Site em `site/`, refeito do zero a partir dos três vídeos de referência (zip `drive-download…`):
 - **ÉCLAT**: escuro, a pizza montada pela rolagem (farinha, massa, molho, cobertura, forno), letreiro de ingredientes, faíscas flutuando, cardápio em cartões.
@@ -6,27 +6,23 @@ Site em `site/`, refeito do zero a partir dos três vídeos de referência (zip 
 - **Editorial food film**: comida que se separa no ar conforme a rolagem.
 
 ## O que tem na página
-1. **A pizza nasce na bancada enquanto você rola** (versão 4 do topo, 21/10/2026; Three.js e GLSL, desenhada em código). Seis cenas ligadas à rolagem, com causa e consequência:
-   - **A massa**: bancada escura de pedra com um pouco de farinha, luz quente de lado em foco de luz, farinha caindo de leve no ar. A bola de massa entra pelo alto, a câmera acompanha a queda; no contato ela achata, quica e se acomoda, a câmera dá um tranco e uma nuvem de farinha se espalha rente à bancada (cada grão segue uma trajetória com arrasto e gravidade, calculada na placa de vídeo) e deixa rastros e grumos na bancada. Depois a massa é esticada até virar o disco, já com a borda.
-   - **O molho**: a concha desce cheia, inclina, o fio de molho cai (primeiro uma gota, depois o fio, que afina e se solta), forma uma poça no centro, e o fundo da concha espalha o molho em espiral até a borda.
-   - **O queijo**: a mussarela cai em chuva, como de uma mão que dá a volta na pizza, em duas passadas; cada fio quica de leve, e a camada aparece exatamente onde os fios caem.
-   - **A cobertura**: calabresa posta uma a uma, em arco e girando, desacelerando até o lugar; depois cebola e azeitona. É o sabor da etiqueta da casa (calabresa, cebola e azeitona).
-   - **O forno**: orégano em chuva lenta, o brilho do forno doura borda e queijo, e o manjericão cai devagar, balançando como folha.
-   - **Pronta**: a câmera se aproxima em três quartos, com vapor e um leve movimento de câmera e luz (sem giro contínuo).
-   Os botões "Reservar mesa" e "Ver o buffet" ficam fixos no canto durante toda a sequência. A rolagem nunca é bloqueada; com animação ligada, a história acompanha a rolagem com uma leve suavização. A vista explodida "Por dentro" e as etiquetas saíram, porque a nova narrativa termina na revelação.
-2. Letreiro, **A casa** (frase + logo aceso), **números** acesos (7 dias, 4h, 4 categorias: tradicionais, especiais, nobres e doces; porções e comida japonesa à vontade, com um ∞ em neon; 10 convidados **pagantes** e o aniversariante não paga). A seção A casa tem ao fundo a foto da fachada à noite (`site/assets/img/fachada-noite.webp`), com o texto sobre o céu escuro à esquerda.
+1. **A pizza montada em vídeo** (versão 8 do topo, 22/10/2026). O vídeo enviado (`gemini_generated_video_b8b087d1.mp4`, 10 s) ocupa toda a largura do topo e é conduzido pela rolagem: rolar para baixo avança o filme, rolar para cima volta. A bola de massa cai na farinha, a massa aberta, o molho espalhado com a colher, o queijo, a calabresa, a cebola e as azeitonas, o orégano e a pizza pronta. As legendas acompanham o filme:
+   - 01 A massa, 02 O molho, 03 O queijo, 04 A cobertura, 05 O orégano e 06 Pronta. Cada etapa tem o seu trecho de rolagem, e os cortes do filme passam numa faixa curta; um brilho quente do forno cobre o corte para a pizza pronta.
+   - Sobre o vídeo, uma sombra à esquerda e embaixo mantém o título e os botões legíveis. No celular o vídeo fica no alto, na largura da tela, e o texto embaixo.
+   - O vídeo foi recodificado sem áudio, com quadro-chave a cada 4 quadros, para avançar e voltar sem travar: `site/assets/video/montagem-720.mp4` (1280 × 720, 3,8 MB, computador) e `montagem-480.mp4` (854 × 480, 2 MB, celular), com a primeira imagem como pôster (`montagem-poster.webp`). O arquivo é baixado inteiro antes de entrar; até lá aparece o pôster. O original fica guardado na pasta e não é publicado.
+   - Com "reduzir movimento", o vídeo não toca sozinho: a rolagem escolhe o quadro.
+   Os botões "Reservar mesa" e "Ver o buffet" ficam fixos o tempo todo. As camadas recortadas da foto (versões 6 e 7) saíram do site.
+2. Letreiro, **A casa** (frase + logo aceso), **números** acesos (7 dias, 4h, pizzas, porções e comida japonesa à vontade, com um ∞ em neon e as 4 categorias de pizza na legenda; 10 convidados **pagantes** e o aniversariante não paga). A seção A casa tem ao fundo a foto da fachada à noite (`site/assets/img/fachada-noite.webp`), com o texto sobre o céu escuro à esquerda.
 3. **O balcão**: 4 cartões com desenhos em linha amarela que se desenham ao entrar na tela.
 4. **Experiências**: espaço kids e aniversário.
-5. **Avaliações no Google**: nota 4,4 com 734 avaliações (outubro de 2026), um trecho curto em destaque com o nome da autora e um resumo, em palavras nossas, do que mais aparece nas avaliações. Os textos completos ficam no Google (botão "Ver as avaliações"). A calculadora de preço foi retirada a pedido.
-6. **Bom saber** (regras em linhas que abrem), **Reserva** com calendário, **Visite** com letreiro gigante.
+5. **Espaço kids monitorado** (no lugar das avaliações do Google, a pedido): foto do espaço kids (`site/assets/img/espaco-kids.webp`) com as cantoneiras amarelas, e três pontos: monitorado, incluso no buffet, 0 a 4 anos não pagam e 5 a 8 pagam meia. No menu, "Avaliações" virou "Espaço kids".
+6. **Bom saber** (regras em linhas que abrem), **Reserva** com calendário (chegada das 19h às 20h, de 15 em 15 minutos; lembrete de que o aniversariante só ganha o buffet com 10 convidados pagantes; caixa obrigatória "Li e concordo com os termos da reserva", que remete ao Bom saber; aviso para aguardar a confirmação pelo WhatsApp), **Visite** com letreiro gigante.
 
-Nenhuma foto da pasta é usada. Os fatos vêm do manual "regras e funcionamento pizzaria.pdf".
+As imagens usadas são as enviadas na conversa (fachada à noite, espaço kids) e o vídeo da montagem. Os fatos vêm do manual "regras e funcionamento pizzaria.pdf".
 
-## Realismo da pizza (JavaScript + GLSL)
-- Tudo é gerado em código: não há modelos 3D, fotos nem vídeos de comida no projeto. A massa é uma malha que se deforma (bola, impacto, disco com a mesma borda da pizza), a farinha são partículas com física pré-calculada, o molho tem fio, poça e espalhamento em espiral, o queijo são fios 3D em queda com a camada revelada onde caem.
-- Pós-processamento em GLSL só no computador: foco de lente macro (o que cai e a pizza nítidos, o resto desfocado) e brilho suave nos pontos de luz. No celular fica desligado e há menos partículas.
-- Para chegar a fotorrealismo de verdade faltam recursos que não existem na pasta: (1) uma sequência de imagens ou vídeo filmado ou renderizado da massa caindo e da farinha (por exemplo 150 a 200 quadros, 1920 px, fundo preto), tocada quadro a quadro pela rolagem; (2) um modelo 3D escaneado da pizza pronta (glTF com texturas PBR); (3) texturas PBR de alta resolução de massa, molho, mussarela e calabresa; (4) fotos de estúdio dos ingredientes com fundo transparente.
-- Para testar um momento específico da sequência há o modo `?debug` (só expõe a cena no console).
+## Realismo da pizza
+- O topo usa o vídeo enviado, com ingredientes reais filmados, no lugar das camadas recortadas.
+- O vídeo tem 1280 × 720; em telas grandes ele é ampliado para cobrir a largura e fica um pouco macio. Uma versão em 1920 × 1080 do mesmo vídeo deixaria tudo mais nítido (basta trocar o arquivo e recodificar do mesmo jeito).
 
 ## Identidade
 - Preto `#050505`, amarelo da marca `#FCF10C` (brilho `rgba(252,241,12,.5)`), branco neutro `#F4F4F2`.
@@ -40,5 +36,4 @@ Curvas `cubic-bezier(0.23, 1, 0.32, 1)` e `(0.77, 0, 0.175, 1)`. Com "reduzir mo
 - Número do WhatsApp (`CONFIG.whatsapp` em `site/assets/js/main.js`). Sem ele, a reserva abre o Instagram e copia a mensagem.
 - Endereço e telefone vieram do perfil do Google: Rua Maria Antonieta dos Santos, 300, Maria Antonieta, Pinhais, PR, 83331-000 · (41) 3669-6782. Falta só o link de delivery, se houver.
 - Itens citados nos cartões a partir das fotos antigas (picanha, salmão, presunto e queijo, pizza de morango). Sobremesa: fondue de frutas.
-- Atualizar a nota e o número de avaliações de tempos em tempos (estão fixos no HTML).
 - Regra do aniversário: considerei o aniversariante adulto e as crianças de meia como pagantes.
